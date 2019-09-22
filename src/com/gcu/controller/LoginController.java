@@ -38,8 +38,14 @@ public class LoginController {
 
         if(user.getUsername().equals("tester") && user.getPassword().equals("testing")){
             return new ModelAndView("loginSuccess", "user", user);
-        } else {
-            return new ModelAndView("loginFailed", "user", user);
+        } 
+        //(temporarily?) returns to the login page with a message stating failure until a better solution is presented
+        else {
+        	 ModelAndView response = new ModelAndView();
+        	 response.setViewName("loginPortal");
+        	 response.addObject("user", user);
+        	 response.addObject("failed", "Incorrect Username or Password");
+           	return response;
         }
     }
 }

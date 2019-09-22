@@ -16,8 +16,8 @@ public class UserModel {
     @NotNull(message = "This is a required field")
     @Size(min = 7, max = 32, message = "Please be sure that your password is at least 7 characters and less than 32")
     private String password;
+    //Had to kill email for time being, threw very nasty errors due to not recognizing email validation constraints
     @NotNull(message = "This is a required field")
-    @Email(message = "Please enter a valid email")
     private String email;
     private int role;
     private int status;
@@ -36,7 +36,7 @@ public class UserModel {
     public UserModel(String username, String password) {
         this.username = username;
         this.password = password;
-        //I believe this will be necessary so that the login form doesn't trip the validation haven't tested though
+        //Email validation ended up not resolving at all, so this ended up being unnecessary (for now)
         this.email = "test@test.test";
     }
 
