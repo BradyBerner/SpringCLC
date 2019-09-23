@@ -1,3 +1,5 @@
-<div align="center">
-	<h5>Copyright Michael and Brady 2019</h5>
-</div>
+<footer class="page-footer dark">
+        <div class="footer-copyright">
+            <p>© Michael and Brady 2019</p>
+        </div>
+</footer>
