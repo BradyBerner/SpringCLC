@@ -55,11 +55,14 @@ public class UserModel {
     }
 
     //Non-default constructor for use during registration
-    public UserModel(int ID, String username, String password, String email, int role, int status) {
+    public UserModel(int ID, String firstName, String lastName, String username, String password, String email, String phoneNumber, int role, int status) {
         this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.role = role;
         this.status = status;
     }
