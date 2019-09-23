@@ -32,15 +32,15 @@ public class UserModel {
 
     //Default constructor for forms
     public UserModel(){
-        ID = 0;
-        firstName = "fname";
-        lastName = "lname";
+        ID = 0; // The user's ID, largely used in conjuction with a database
+        firstName = "fname"; //User's first name
+        lastName = "lname"; // User's last name
         username = "Username";
         password = "Password";
-        email = "test@test.test";
-        phoneNumber = "111-111-1111";
-        role = 0;
-        status = 0;
+        email = "test@test.test"; //Valid email for user
+        phoneNumber = "111-111-1111"; // Phone number, entered with dashes and no parenthesis
+        role = 0; //Whether the user is a typical user or administrator
+        status = 0; //Whether the user is active or disabled
     }
 
     //Non-default constructor for use during login

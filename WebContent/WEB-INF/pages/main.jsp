@@ -1,3 +1,4 @@
+<!-- Main landing page after a login, contains links to other parts of the site -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 

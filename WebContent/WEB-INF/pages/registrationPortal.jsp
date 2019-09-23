@@ -1,3 +1,5 @@
+<!--  This file handles the registration form when a user signs up for the site -->
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 

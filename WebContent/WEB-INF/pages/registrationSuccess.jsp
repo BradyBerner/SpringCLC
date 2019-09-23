@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<!-- Temporary Page used to signify a user has successfully registered -->
 <section class="clean-block clean-form dark" style="background-color: #444444;">
 <div class="container">
 <div class="block-heading">

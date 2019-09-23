@@ -5,6 +5,7 @@
 <head>
 	<title>Spring CLC</title>
 	
+	<!-- Bootstrap Resources and other CSS files -->
 	<spring:url value="/resources/css/main.css" var="mainCss" />
 	<spring:url value="/resources/css/bootstrap.min.css" var="bootstrap" />
 	<spring:url value="/resources/js/main.js" var="mainJs" />
