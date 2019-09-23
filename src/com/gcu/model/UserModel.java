@@ -1,5 +1,6 @@
 package com.gcu.model;
 
+
 import javax.validation.constraints.*;
 
 /*
@@ -32,9 +33,12 @@ public class UserModel {
     //Default constructor for forms
     public UserModel(){
         ID = 0;
+        firstName = "fname";
+        lastName = "lname";
         username = "Username";
         password = "Password";
-        email = "Email";
+        email = "test@test.test";
+        phoneNumber = "111-111-1111";
         role = 0;
         status = 0;
     }

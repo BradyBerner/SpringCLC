@@ -37,7 +37,7 @@ public class LoginController {
         }
 
         if(user.getUsername().equals("tester") && user.getPassword().equals("testing")){
-            return new ModelAndView("loginSuccess", "user", user);
+            return new ModelAndView("main", "user", user);
         } 
         //(temporarily?) returns to the login page with a message stating failure until a better solution is presented
         else {
