@@ -17,12 +17,12 @@
 				</div>
 				
 				<div class="form-group">
-				<form:label path= "password">Password<br/></form:label>
+				<form:label path= "password">Password</form:label>
 				<form:password path = "password" class="form-control"/><form:errors path ="password"/>
 				</div>
 				
 				<div class="form-group">
-				<a href="../registration/portal" class="text-warning">Not a member?</a>
+				<a href="../registration/portal" class="text-warning">New to Spring CLC?</a>
 				</div>
 				
 				<button class="btn btn-dark btn-block" type="submit">Log In</button>

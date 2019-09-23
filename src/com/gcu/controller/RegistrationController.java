@@ -41,6 +41,6 @@ public class RegistrationController {
             return new ModelAndView("registrationPortal", "user", user);
         }
         
-        return new ModelAndView("registrationSuccess", "user", new UserModel());
+        return new ModelAndView("registrationSuccess", "user", user);
     }
 }
