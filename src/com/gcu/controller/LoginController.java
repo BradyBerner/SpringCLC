@@ -22,7 +22,7 @@ public class LoginController {
     @RequestMapping(path = "/portal", method = RequestMethod.GET)
     public ModelAndView displayPage(){
         //Change these view names as you see fit I just tried to make it obvious what they led to
-        return new ModelAndView("loginPortal", "user", new UserModel());
+        return new ModelAndView("loginPortal", "user", new UserModel("", ""));
     }
 
     /*

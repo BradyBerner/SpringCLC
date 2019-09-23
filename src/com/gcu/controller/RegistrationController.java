@@ -22,7 +22,7 @@ public class RegistrationController {
      */
     @RequestMapping(path = "/portal", method = RequestMethod.GET)
     public ModelAndView displayPage(){
-        return new ModelAndView("registrationPortal", "user", new UserModel());
+        return new ModelAndView("registrationPortal", "user", new UserModel(0, "", "", "", "", "", "", 0, 0));
     }
 
     /*
