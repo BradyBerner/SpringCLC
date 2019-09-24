@@ -60,5 +60,7 @@ WebContent/WEB-INF/lib/spring-beans-4.3.9.RELEASE.jar
 WebContent/WEB-INF/web.xml
 /bin/
 SpringCLC.iml
-WebContent/WEB-INF/applicationConfiguration.xml
-WebContent/WEB-INF/dispatcher-servlet.xml
+WEB-INF/applicationConfiguration.xml
+WEB-INF/dispatcher-servlet.xml
+/WebContent/WEB-INF/dispatcher-servlet.xml
+/WebContent/WEB-INF/applicationConfiguration.xml
