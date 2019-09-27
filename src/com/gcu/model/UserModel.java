@@ -43,17 +43,6 @@ public class UserModel {
         status = 0; //Whether the user is active or disabled
     }
 
-    //Non-default constructor for use during login
-    public UserModel(String username, String password) {
-        firstName = "fname";
-        lastName = "lname";
-        this.username = username;
-        this.password = password;
-        //Email validation ended up not resolving at all, so this ended up being unnecessary (for now)
-        email = "test@test.test";
-        phoneNumber = "111-111-1111";
-    }
-
     //Non-default constructor for use during registration
     public UserModel(int ID, String firstName, String lastName, String username, String password, String email, String phoneNumber, int role, int status) {
         this.ID = ID;

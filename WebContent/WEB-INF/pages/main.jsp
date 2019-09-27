@@ -1,3 +1,4 @@
+<%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
 <!-- Main landing page after a login, contains links to other parts of the site -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -6,7 +7,7 @@
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-white" style="color: #ffffff;">Welcome to Our CLC</h2>
-                    <p class="text-white" style="color: #ffffff;">Welcome back, ${user.username}!</p>
+                    <p class="text-white" style="color: #ffffff;">Welcome back, ${credentials.username}!</p>
                     <a href="../registration/portal">Register a New User</a>
                 </div>
                 <div class="row justify-content-center">
