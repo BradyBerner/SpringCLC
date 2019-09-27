@@ -22,15 +22,16 @@
 				<form:label path= "lastName">Last Name</form:label>
 				<form:input path = "lastName" class="form-control item"/><form:errors path ="lastName"/>
 		</div>
-		
+
+		<!-- TODO: figure out validation -->
 		<div class="form-group">
 				<form:label path= "username">Username</form:label>
-				<form:input path = "username" class="form-control item"/><form:errors path ="username"/>
+				<form:input path = "username" class="form-control item"/><form:errors path ="credentials.username"/>
 		</div>
 		
 		<div class="form-group">
 				<form:label path= "password">Password</form:label>
-				<form:password path = "password" class="form-control item"/><form:errors path ="password"/>
+				<form:password path = "password" class="form-control item"/><form:errors path ="credentials.password"/>
 		</div>
 		
 		<div class="form-group">
