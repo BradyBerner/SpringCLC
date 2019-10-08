@@ -1,14 +1,14 @@
 package com.gcu.model;
 
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class CredentialsModel {
 
-    @NotNull(message = "This is a required field")
+    @NotEmpty(message = "This is a required field")
     @Size(min = 2, max = 14, message = "Please be sure that the entered user name is more than 2 and less than 14")
     private String username;
-    @NotNull(message = "This is a required field")
+    @NotEmpty(message = "This is a required field")
     @Size(min = 7, max = 32, message = "Please be sure that the entered password is at least 7 characters and less than 32")
     private String password;
 
