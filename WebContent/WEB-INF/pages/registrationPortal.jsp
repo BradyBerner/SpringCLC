@@ -23,7 +23,6 @@
 				<form:input path = "lastName" class="form-control item"/><form:errors path ="lastName"/>
 		</div>
 
-		<!-- TODO: figure out validation -->
 		<div class="form-group">
 				<form:label path= "username">Username</form:label>
 				<form:input path = "username" class="form-control item"/><form:errors path ="credentials.username"/>

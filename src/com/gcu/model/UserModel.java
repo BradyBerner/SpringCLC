@@ -1,6 +1,8 @@
 package com.gcu.model;
 
 
+import org.hibernate.validator.constraints.Email;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /*
@@ -15,9 +17,12 @@ public class UserModel {
     @NotNull(message = "This is a required field")
     @Size(min = 2, max = 14, message = "Please be sure that your input is more than 2 characters and less than 14")
     private String lastName;
+    @Valid
     private CredentialsModel credentials;
     //Had to kill email for time being, threw very nasty errors due to not recognizing email validation constraints
     @NotNull(message = "This is a required field")
+    @Size(min = 3, message = "This is a required field")
+    @Email(message = "Please enter a valid email address")
     private String email;
     @NotNull
     @Pattern(regexp="\\d{3}-\\d{3}-\\d{4}", message = "Please be sure that you've entered your phone number without the country code and with \"-\" between the area codes")
