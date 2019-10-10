@@ -63,14 +63,6 @@ public class UserModel {
         this.ID = ID;
     }
 
-    public String getUsername(){ return credentials.getUsername(); }
-
-    public void setUsername(String username){ credentials.setUsername(username); }
-
-    public String getPassword(){ return credentials.getPassword(); }
-
-    public void setPassword(String password){ credentials.setPassword(password);}
-
     public CredentialsModel getCredentials() {
         return credentials;
     }
