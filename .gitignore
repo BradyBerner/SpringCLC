@@ -57,10 +57,5 @@ WebContent/WEB-INF/lib/spring-aop-4.3.9.RELEASE.jar
 WebContent/WEB-INF/lib/slf4j-api-1.7.9.jar
 WebContent/WEB-INF/lib/spring-beans-4.3.9.RELEASE.jar
 *.jar
-WebContent/WEB-INF/web.xml
 /bin/
 SpringCLC.iml
-WEB-INF/applicationConfiguration.xml
-WEB-INF/dispatcher-servlet.xml
-/WebContent/WEB-INF/dispatcher-servlet.xml
-/WebContent/WEB-INF/applicationConfiguration.xml
