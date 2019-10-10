@@ -12,8 +12,7 @@
            <p class="text-warning">Welcome back! Please log in below</p>
         </div>
 	<h2 class="warning_label">${failed}</h2>
-	<%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
-	<form:form method ="POST" modelAttribute = "credentials" action="doLogin" style="background-color: #888888;">
+	<form:form method ="POST" modelAttribute = "user" action="doLogin" style="background-color: #888888;">
 				<div class="form-group">
 				<form:label path= "username">Username</form:label>
 				<form:input path = "username" class="form-control item"/><form:errors path ="username"/>
