@@ -59,3 +59,4 @@ WebContent/WEB-INF/lib/spring-beans-4.3.9.RELEASE.jar
 *.jar
 /bin/
 SpringCLC.iml
+/out/
