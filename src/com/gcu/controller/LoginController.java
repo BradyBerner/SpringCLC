@@ -1,7 +1,6 @@
 package com.gcu.controller;
 
 import com.gcu.model.CredentialsModel;
-import com.gcu.model.UserModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;

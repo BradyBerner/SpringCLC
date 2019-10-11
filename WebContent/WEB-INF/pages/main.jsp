@@ -1,14 +1,13 @@
 <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
 <!-- Main landing page after a login, contains links to other parts of the site -->
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-        <section class="clean-block about-us" style="background-color: rgba(136,136,136,0);background-image: url(&quot;../resources/images/music-notes-wallpaper-16213-16712-hd-wallpapers.jpg&quot;);">
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+    <!--TODO: Fix image sources-->
+        <section class="clean-block about-us" style="background-color: rgb(35, 35, 35); padding-top: 10px;">
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-white" style="color: #ffffff;">Welcome to Our CLC</h2>
                     <p class="text-white" style="color: #ffffff;">Welcome back, ${credentials.username}!</p>
-                    <a href="../registration/portal">Register a New User</a>
+                    <a href="/SpringCLC/registration/portal">Register a New User</a>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4">

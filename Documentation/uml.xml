@@ -1,1 +1,86 @@
-<mxfile modified="2019-09-23T01:23:49.960Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15" etag="LvgKTz04F6x1tdJqASS3" version="11.3.0" type="device" pages="1"><diagram id="pmsSt0qRz6K6vs_K74no" name="Page-1">7VlZb9s4EP41BtqHFKLkq4+x3WYLuIHRbLrZR0aiJaKUKJB0bOfX71CkbvmoXSdYwEAQaIYzI83MN4elnjeNN3cCp9F3HhDWc51g0/NmPdcdew7814ytYYycz4YRChoYFioZD/SVWKbVC1c0ILImqDhniqZ1ps+ThPiqxsNC8HVdbMlZ/a4pDkmL8eBj1ub+QwMVWbcGTsn/i9Awyu+MHHsS41zYMmSEA76usLwvPW8qOFfmKt5MCdOxy+Ni9L7uOC0eTJBEHaPwqJz1KhjfOfPXe3/5NOKPHN1YKy+YrazDj5IIm8XsqdU2D4Vc05jhBKjJkifqwZ4goDGjYQLXPjwLEcB4IUJRiOKtPVA8Ba4fURbM8Zav9BNLhf1fOTWJuKCvYBYzaxOOhbKAcIc1iQetCWwHuIJIkFnkYUAN1ne8qQnOsVSW4XPGcCrpc+FGjEVIkwlXisdWqB3lPGTgIdlUWDbqd4THRIktiNjTvgWArQBvZOl1iSdvbHlRBUtuDjJsMRwWpss0w4XN9G9k3W1l/QbIb7Oed6tVwVONpSHTeQkJUMNQZbEY9lxvg+FSyy+pkOoex8SoPShBk7Cp+VXu1Gf4LPUVADU5XT3FUq65CE5UJzGm7NRbRzwh96v4WZfKSRYEZ2RnsvboQU2plfxdzVYnAOCrrEIF/0WmnHHwY5Zw0xooYw1W3h0YWaqdvUGm2IcgzDOZWb/k/LAVoVkcdJcs66IRDQKS6Lrm4BQ2RawrNuXgWVYxgwn8gYdT59OgN4AHnwKNShr+tLhQU56AL5hmJU4AlmsiVWfx722ihzuCbQE6tMd0AOT1L9QBvFYHaCWZ0Sx5Jsn57EMnZTiGXDFSpvRvnfHZDWql3Wun3etIMcPPhC24pIpybV8Y2Ubq3yu7aHhkgx9fKLn9juSCt04x2j98rFV3/axoRkWDhbqp9Ki8ce6zYXrLt1lDtZwYdX4xCTJ2xe6xz9Jgm+bcEK003eZtzONmTTU7MrRplh+v3e+P18f4yPpwL1Qgg1aBzDksfhAIyCljGiHH7b7O2UttB2D+r3suGtUXXdSx6BbLcDXPo0s1wuGORhhQmTK8XcCPN2iF2Tb0k5L1tdL3V/rgaETs3nM6AZDL/XEAjHYAAK9UBL5CdhT5UIwtC4Xs+jYJrpC4ACQG7jtDArW3ox8kpDoIepu8zoDz3nUM6zPA7diFizdibzIDUHvYX4fAOete/2hM7JkCXRC4XMnv2gNEVvhEXEfAmwKiawa8LSDGLUAAAlqJJklwqz8hAMXTLNrAsY0bgX+TAMuIBLahRirOOzwETGyfqsS/Oj0Qd0vO8kZtqO2hBgwTQ7+gO/hGlwS1rxntDFRCXrymEITB6Hupf/Doirk1t+Dm97HN9aCx9nv5OM9NSL4SPrFa1Q8UDUNDVDdUzJLckIlCy1AGgcLHM1Dx+cKo2FD1ZHCARpbWuECfHG9s6RIYmthWiAURFDzUr4z3Y8WE+/BSfBBT6B0x1YDC0DkVU6MDhk7GFJDltzsjXn4A9b78Bw==</diagram></mxfile>
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile modified="2019-10-11T00:20:51.961Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Safari/605.1.15" etag="QBdP66RDh76a7N2SrYb5" version="12.1.0" type="device" pages="1">
+  <diagram id="pmsSt0qRz6K6vs_K74no" name="Page-1">
+    <mxGraphModel dx="830" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-1" value="UserModel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="370" width="380" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-2" value="- ID: int &lt;get&gt;&#xa;- firstName: String &lt;get/set&gt;&#xa;- lastName: String &lt;get/set&gt;&#xa;- credentials: CredentialsMode &lt;get/set&gt;l&#xa;- email: String &lt;get/set&gt;&#xa;- phoneNumber: String &lt;get/set&gt;&#xa;- role: int &lt;get/set&gt;&#xa;- status: int &lt;get/set&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-1" vertex="1">
+          <mxGeometry y="26" width="380" height="124" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-1" vertex="1">
+          <mxGeometry y="150" width="380" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-4" value="+ UserModel()&#xa;+ UserModel(int ID, String firstName, String lastName, &#xa;String username, String password, String email, String phoneNumber, &#xa;int role, int status)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-1" vertex="1">
+          <mxGeometry y="158" width="380" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-5" value="LoginController" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="170" y="170" width="240" height="78" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-6" value="+ displayPage(): View" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-5" vertex="1">
+          <mxGeometry y="26" width="240" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-7" value="+ authenticate(UserModel): ModelAndView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-5" vertex="1">
+          <mxGeometry y="52" width="240" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-14" value="RegistrationController" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="260" width="220" height="78" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-15" value="+ displayPage(): View" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-14" vertex="1">
+          <mxGeometry y="26" width="220" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-16" value="+ register(UserModel): ModelAndView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Ut0wud8G0LzNcfX7oUo1-14" vertex="1">
+          <mxGeometry y="52" width="220" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-18" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="Ut0wud8G0LzNcfX7oUo1-2" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="570" y="340" as="sourcePoint"/>
+            <mxPoint x="610" y="460" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ut0wud8G0LzNcfX7oUo1-19" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.517;exitY=1.038;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="Ut0wud8G0LzNcfX7oUo1-7" target="Ut0wud8G0LzNcfX7oUo1-1" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="510" y="600" as="sourcePoint"/>
+            <mxPoint x="670" y="600" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-1" value="CredentialsModel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="75" y="690" width="310" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-2" value="- username: String &lt;get/set&gt;&#xa;- password: String &lt;get/set&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-1">
+          <mxGeometry y="26" width="310" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-1">
+          <mxGeometry y="60" width="310" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-4" value="+ CredentialsModel()&#xa;+ CredentialsModel(String username, String password)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-1">
+          <mxGeometry y="68" width="310" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-8" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.503;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="BbbQzLPMykJwlpikkLGx-1" target="Ut0wud8G0LzNcfX7oUo1-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="250" y="650" as="sourcePoint"/>
+            <mxPoint x="225" y="620" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-9" value="1" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="240" y="600" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-14" value="ProductModel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="520" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-15" value="- ID: int &lt;get&gt;&#xa;- userID: int &lt;get&gt;&#xa;- name: String &lt;get/set&gt;&#xa;- description: String &lt;get/set&gt;&#xa;- tags: ArrayList&lt;String&gt; &lt;get/set&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-14">
+          <mxGeometry y="26" width="260" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-16" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-14">
+          <mxGeometry y="100" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-17" value="+ ProductModel()&#xa;+ ProductModel(int ID, int userID, String name,&#xa;String description, ArrayList&lt;String&gt; tags)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-14">
+          <mxGeometry y="108" width="260" height="52" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
