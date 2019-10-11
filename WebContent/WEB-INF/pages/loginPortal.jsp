@@ -5,7 +5,7 @@
     
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<section class="clean-block clean-form dark" style="background-color: #444444;">
+<section class="clean-block clean-form dark" style="background-color: #444444; padding-top: 10px; height: 90%;">
 	<div class="container">
         <div class="block-heading">
            <h2 class="text-warning">Log In</h2>

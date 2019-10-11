@@ -1,13 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
 <!-- Main landing page after a login, contains links to other parts of the site -->
 <%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
     <!--TODO: Fix image sources-->
-        <section class="clean-block about-us" style="background-color: rgb(35, 35, 35); padding-top: 10px;">
+        <section class="clean-block about-us" style="background-color: rgb(35, 35, 35); padding-top: 10px; height:90%;">
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-white" style="color: #ffffff;">Welcome to Our CLC</h2>
-                    <p class="text-white" style="color: #ffffff;">Welcome back, ${credentials.username}!</p>
-                    <a href="/SpringCLC/registration/portal">Register a New User</a>
+                    <c:if test="${credentials.username != null}">
+                        <p class="text-white" style="color: #ffffff;">Welcome back, ${credentials.username}!</p>
+                    </c:if>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4">
