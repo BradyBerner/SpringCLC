@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile modified="2019-10-10T23:38:22.417Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Safari/605.1.15" etag="73NmXgGCGKfNMb_xnQjS" version="12.1.0" type="device" pages="1">
+<mxfile modified="2019-10-11T00:20:51.961Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Safari/605.1.15" etag="QBdP66RDh76a7N2SrYb5" version="12.1.0" type="device" pages="1">
   <diagram id="pmsSt0qRz6K6vs_K74no" name="Page-1">
-    <mxGraphModel dx="830" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="830" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -67,6 +67,18 @@
         </mxCell>
         <mxCell id="BbbQzLPMykJwlpikkLGx-9" value="1" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;" vertex="1" parent="1">
           <mxGeometry x="240" y="600" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-14" value="ProductModel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="520" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-15" value="- ID: int &lt;get&gt;&#xa;- userID: int &lt;get&gt;&#xa;- name: String &lt;get/set&gt;&#xa;- description: String &lt;get/set&gt;&#xa;- tags: ArrayList&lt;String&gt; &lt;get/set&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-14">
+          <mxGeometry y="26" width="260" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-16" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-14">
+          <mxGeometry y="100" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="BbbQzLPMykJwlpikkLGx-17" value="+ ProductModel()&#xa;+ ProductModel(int ID, int userID, String name,&#xa;String description, ArrayList&lt;String&gt; tags)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="BbbQzLPMykJwlpikkLGx-14">
+          <mxGeometry y="108" width="260" height="52" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
