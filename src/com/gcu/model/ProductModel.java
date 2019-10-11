@@ -1,29 +1,34 @@
 package com.gcu.model;
 
-import java.util.ArrayList;
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class ProductModel {
 
     private int ID;
     private int userID;
+    @NotEmpty(message = "This is a required field")
+    @Size(min = 1, max = 40, message = "Please make sure the name of the product is between 1 and 40 characters")
     private String name;
+    @Size(max = 255, message = "Please limit the product's description to 255 characters")
     private String description;
-    private ArrayList<String> tags;
+    @Size(max = 14, message = "Please limit the product's genre to 14 characters")
+    private String genre;
 
     public ProductModel(){
         ID = 0;
         userID = 0;
         name = "";
         description = "";
-        tags = new ArrayList<>();
+        genre = "";
     }
 
-    public ProductModel(int ID, int userID, String name, String description, ArrayList<String> tags) {
+    public ProductModel(int ID, int userID, String name, String description, String genre) {
         this.ID = ID;
         this.userID = userID;
         this.name = name;
         this.description = description;
-        this.tags = tags;
+        this.genre = genre;
     }
 
     public int getID() {
@@ -58,11 +63,11 @@ public class ProductModel {
         this.description = description;
     }
 
-    public ArrayList<String> getTags() {
-        return tags;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
+    public void setGenre(String genre){
+        this.genre = genre;
     }
 }
