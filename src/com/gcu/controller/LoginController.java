@@ -1,6 +1,9 @@
 package com.gcu.controller;
 
+import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.CredentialsModel;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +18,20 @@ Controller for user login. Currently using hard-coded validation logic until a d
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
+	
+	//Class scoped business service to handle back-end logic
+	private UserBusinessInterface userService;
+	
+	/**
+	 * This function injects a user business service at runtime for use in this particular class
+	 * @param userService A business service which handles any functions related to login
+	 */
+	@Autowired
+	public void setUserBusinessService(UserBusinessInterface userService)
+	{
+		this.userService=userService;
+	}
+	
     /*
     Method for displaying login form page
      */
@@ -36,7 +52,7 @@ public class LoginController {
             return new ModelAndView("loginPortal", "credentials", credentials);
         }
 
-        if(credentials.getUsername().equals("tester") && credentials.getPassword().equals("testing")){
+        if(userService.authenticate(credentials)>0){
             return new ModelAndView("main", "credentials", credentials);
         } 
         //(temporarily?) returns to the login page with a message stating failure until a better solution is presented

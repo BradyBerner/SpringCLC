@@ -1,7 +1,10 @@
 package com.gcu.controller;
 
+import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.MessageModel;
 import com.gcu.model.UserModel;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +21,20 @@ all entered information is valid, will eventually be attached to the database to
 @RequestMapping("/registration")
 public class RegistrationController {
 
+	
+	//Class scoped business service to handle back-end logic
+	private UserBusinessInterface userService;
+		
+	/**
+	 * This function injects a user business service at runtime for use in this particular class
+	* @param userService A business service which handles any functions related to login
+	*/
+	@Autowired
+	public void setUserBusinessService(UserBusinessInterface userService)
+	{
+		this.userService=userService;
+	}
+	
     /*
     Method for displaying the registration form page
      */
