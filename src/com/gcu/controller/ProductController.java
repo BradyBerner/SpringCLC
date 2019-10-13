@@ -27,7 +27,8 @@ public class ProductController {
         }
 
         if(true) {
-            return new ModelAndView("main", "message", new MessageModel("New Product Successfully Created", 1));
+            String m = String.format("New Product Successfully Created With the Following Details: Name: %s Description: %s Genre: %s", product.getName(), product.getDescription(), product.getGenre());
+            return new ModelAndView("main", "message", new MessageModel(m, 1));
         } else {
             return new ModelAndView("main", "message", new MessageModel("There was a problem creating your product", 0));
         }
