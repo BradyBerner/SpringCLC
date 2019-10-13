@@ -1,5 +1,6 @@
 package com.gcu.controller;
 
+import com.gcu.model.MessageModel;
 import com.gcu.model.UserModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,6 @@ public class RegistrationController {
             return new ModelAndView("registrationPortal", "user", user);
         }
         
-        return new ModelAndView("registrationSuccess", "user", user);
+        return new ModelAndView("main", "message", new MessageModel("Registration Successful!", 1));
     }
 }

@@ -34,7 +34,7 @@
 
 			<div class="form-group">
 				<form:label path= "email">Email</form:label>
-				<form:input type= "?email?" path = "email" class="form-control item"/><form:errors path ="email"/>
+				<form:input type = "?email?" path = "email" class="form-control item"/><form:errors path ="email"/>
 			</div>
 
 			<div class="form-group">

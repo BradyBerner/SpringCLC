@@ -27,7 +27,7 @@
 	<tiles:insertAttribute name="header" />
 
 	<!-- Body Page -->
-	<div align="center">
+	<div align="center" style="text-align: center; padding-top: 15px;">
 		<tiles:insertAttribute name="body" />
 	</div>
 
