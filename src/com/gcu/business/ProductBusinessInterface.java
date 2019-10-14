@@ -1,5 +1,7 @@
 package com.gcu.business;
 
+import java.util.List;
+
 import com.gcu.model.ProductModel;
 
 /**
@@ -13,7 +15,7 @@ public interface ProductBusinessInterface
 	//Single read method
 	public ProductModel findByID(int id);
 	//Read all method
-	public ProductModel[] findAll();
+	public List<ProductModel> findAll();
 	//Update method
 	public boolean editProduct(ProductModel product);
 	// Destroy method

@@ -31,9 +31,11 @@
 	
 	<!-- EJB Configuration -->
 	<bean id="userService" class="com.gcu.business.UserBusinessService" scope="singleton">
+		<property name ="userDataService" ref="userDataService"/>
 		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	<bean id="productService" class="com.gcu.business.ProductBusinessService" scope="singleton">
+		<property name ="productDataService" ref="productDataService"/>
 		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	
@@ -42,4 +44,7 @@
     <bean id ="registrationController" class="com.gcu.controller.RegistrationController"/>
  	<bean id ="productController" class="com.gcu.controller.ProductController"/>
  	
+ 	<!-- Data service configuration -->
+ 	<bean id= "userDataService" class="com.gcu.data.UserDataService"/>
+ 	<bean id= "productDataService" class="com.gcu.data.ProductDataService"/>
  </beans>

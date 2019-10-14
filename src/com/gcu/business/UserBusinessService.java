@@ -1,5 +1,9 @@
 package com.gcu.business;
 
+import java.util.List;
+
+import com.gcu.data.DataAccessInterface;
+import com.gcu.data.UserDataService;
 import com.gcu.model.CredentialsModel;
 import com.gcu.model.UserModel;
 
@@ -8,7 +12,19 @@ import com.gcu.model.UserModel;
  */
 public class UserBusinessService implements UserBusinessInterface 
 {
-
+	
+	//Class scoped data service injected at runtime
+	DataAccessInterface<UserModel> userService;
+	
+	/**
+	 * This method injects a data Service at runtime to be used within the business service
+	 * @param userService The data service to be injected
+	 */
+	public void setUserDataService(DataAccessInterface<UserModel> userService)
+	{
+		this.userService=userService;
+	}
+	
 	/**
 	 * Method that handles attempted user login
 	 * @param credentials The credentials a user is attempting to log in with
@@ -17,14 +33,9 @@ public class UserBusinessService implements UserBusinessInterface
 	@Override
 	public int authenticate(CredentialsModel credentials) 
 	{
-		if(credentials.getUsername().equals("tester") && credentials.getPassword().equals("testing"))
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
+		//Unable to use findByCredential method as it implements the generic DataAccessInterface
+		UserModel user = ((UserDataService)userService).findByCredential(credentials);
+		return user.getID();
 	}
 	
 	/**
@@ -46,18 +57,17 @@ public class UserBusinessService implements UserBusinessInterface
 	@Override
 	public UserModel findByID(int id) 
 	{
-		return new UserModel(id, "User", "Found", "UsingFindBy", "password", "Hello@World.com", "111-111-1111", 0, 1);
+		return userService.findByID(id);
 	}
 
 	/**
-	 * A method that returns an array of every user in the database
-	 * @return An array of all users within the database
+	 * A method that returns a list of every user in the database
+	 * @return A list of all users within the database
 	 */
 	@Override
-	public UserModel[] findAll() 
+	public List<UserModel> findAll() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return userService.findAll();
 	}
 
 	/**

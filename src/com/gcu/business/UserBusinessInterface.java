@@ -1,5 +1,7 @@
 package com.gcu.business;
 
+import java.util.List;
+
 import com.gcu.model.CredentialsModel;
 import com.gcu.model.UserModel;
 
@@ -12,7 +14,7 @@ public interface UserBusinessInterface
 		//Single read method
 		public UserModel findByID(int id);
 		//Read all method
-		public UserModel[] findAll();
+		public List<UserModel> findAll();
 		//Update method
 		public boolean editUser(UserModel user);
 		// Deletion method

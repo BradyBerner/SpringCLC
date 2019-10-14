@@ -1,12 +1,27 @@
 package com.gcu.business;
 
+import java.util.List;
+import com.gcu.data.DataAccessInterface;
 import com.gcu.model.ProductModel;
+
 
 /**
  * Implementation of a product business service that can handle business logic related to products
  */
-public class ProductBusinessService implements ProductBusinessInterface {
-
+public class ProductBusinessService implements ProductBusinessInterface 
+{
+	//Class scoped data service injected at runtime
+	DataAccessInterface<ProductModel> productService;
+	
+	/**
+	 * This method injects a data Service at runtime to be used within the business service
+	 * @param productService The data service to be injected
+	 */
+	public void setProductDataService(DataAccessInterface<ProductModel> productService)
+	{
+		this.productService=productService;
+	}
+	
 	/**
 	 * Method to add a product to the database of products
 	 * @param product The product to be added
@@ -26,18 +41,17 @@ public class ProductBusinessService implements ProductBusinessInterface {
 	@Override
 	public ProductModel findByID(int id) 
 	{
-		return new ProductModel(id, 1, "Found", "A product found using the findByID method", "none");
+		return productService.findByID(id);
 	}
 
 	/**
-	 * A method that returns an array of every product in the database
-	 * @return An array of all products currently in the database
+	 * A method that returns a list of every product in the database
+	 * @return A list of all products currently in the database
 	 */
 	@Override
-	public ProductModel[] findAll() 
+	public List<ProductModel> findAll() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return productService.findAll();
 	}
 
 	/**

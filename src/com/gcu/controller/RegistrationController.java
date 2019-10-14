@@ -59,6 +59,9 @@ public class RegistrationController {
             return new ModelAndView("registrationPortal", "user", user);
         }
         
-        return new ModelAndView("main", "message", new MessageModel("Registration Successful!", 1));
+        if(userService.register(user))
+        	return new ModelAndView("main", "message", new MessageModel("Registration Successful!", 1));
+        else
+        	return new ModelAndView("main", "message", new MessageModel("Registration Failed", 1));
     }
 }
