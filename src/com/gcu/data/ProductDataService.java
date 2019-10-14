@@ -1,5 +1,6 @@
 package com.gcu.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gcu.model.ProductModel;
@@ -15,8 +16,13 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	 */
 	@Override
 	public List<ProductModel> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		products.add(new ProductModel(1, 1, "Product1", "A product found using the findAll method", "none"));
+		products.add(new ProductModel(2, 2, "Product2", "A product found using the findAll method", "none"));
+		products.add(new ProductModel(3, 3, "Product3", "A product found using the findAll method", "none"));
+		products.add(new ProductModel(4, 4, "Product4", "A product found using the findAll method", "none"));
+		products.add(new ProductModel(5, 5, "Product5", "A product found using the findAll method", "none"));
+		return products;
 	}
 
 	/**

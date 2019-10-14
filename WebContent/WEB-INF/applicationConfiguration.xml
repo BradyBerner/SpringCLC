@@ -43,6 +43,8 @@
     <bean id ="loginController" class="com.gcu.controller.LoginController"/>
     <bean id ="registrationController" class="com.gcu.controller.RegistrationController"/>
  	<bean id ="productController" class="com.gcu.controller.ProductController"/>
+ 	<bean id ="userRestService" class="com.gcu.service.UserRestService"/>
+ 	<bean id ="productRestService" class="com.gcu.service.ProductRestService"/>
  	
  	<!-- Data service configuration -->
  	<bean id= "userDataService" class="com.gcu.data.UserDataService"/>

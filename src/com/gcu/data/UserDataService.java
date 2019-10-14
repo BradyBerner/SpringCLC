@@ -1,5 +1,6 @@
 package com.gcu.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gcu.model.CredentialsModel;
@@ -35,7 +36,13 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	@Override
 	public List<UserModel> findAll() 
 	{
-		return null;
+		List<UserModel> users= new ArrayList<UserModel>();
+		users.add(new UserModel(1, "UserFrom", "FindAll", "User1", "Password", "Hello@World.com", "111-111-1111", 1, 1));
+		users.add(new UserModel(2, "UserFrom", "FindAll", "User2", "Password", "Hello@World.com", "111-111-1111", 1, 1));
+		users.add(new UserModel(3, "UserFrom", "FindAll", "User3", "Password", "Hello@World.com", "111-111-1111", 1, 1));
+		users.add(new UserModel(4, "UserFrom", "FindAll", "User4", "Password", "Hello@World.com", "111-111-1111", 1, 1));
+		users.add(new UserModel(5, "UserFrom", "FindAll", "User5", "Password", "Hello@World.com", "111-111-1111", 1, 1));
+		return users;
 	}
 
 	/**
