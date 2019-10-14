@@ -19,7 +19,7 @@
                             <div class="alert alert-success" role="alert">${message.message}</div>
                         </c:when>
                         <c:when test="${message.messageType == 2}">
-                            <div class="alert alert-success" role="alert">${message.message}</div>
+                            <div class="alert alert-warning" role="alert">${message.message}</div>
                         </c:when>
                     </c:choose>
                 </c:if>

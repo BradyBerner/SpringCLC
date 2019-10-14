@@ -6,13 +6,18 @@
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav text-warning ml-auto">
                     <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
-                    <!--Temporary way for checking if someone is logged in should be replaced by session var-->
-                    <c:if test="${credentials.username != null && credentials.username != \"\"}">
-                        <li class="nav-item">
-                            <a class="nav-link text-warning" href="/SpringCLC/product/create">Create Product</a>
-                        </li>
-                    </c:if>
-                    <li class="nav-item" role="presentation"><a href="/SpringCLC/login/portal" class="btn btn-primary text-warning bg-dark border-dark">Log In</a></li>
+                    <!--TODO: Temporary way for checking if someone is logged in should be replaced by session var-->
+                    <c:choose>
+                        <c:when test="${credentials.username != null && credentials.username != \"\"}">
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" href="/SpringCLC/product/create">Create Product</a>
+                            </li>
+                            <li class="nav-item" role="presentation"><a href="/SpringCLC/" class="btn btn-primary text-warning bg-dark border-dark">Log Out</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="nav-item" role="presentation"><a href="/SpringCLC/login/portal" class="btn btn-primary text-warning bg-dark border-dark">Log In</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
         </div>
