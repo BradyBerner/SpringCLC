@@ -56,7 +56,7 @@ public class ProductBusinessService implements ProductBusinessInterface
 
 	/**
 	 * A function that allows products to be edited
-	 * @param The product to be edited
+	 * @param product product to be edited
 	 */
 	@Override
 	public boolean editProduct(ProductModel product)
@@ -67,7 +67,7 @@ public class ProductBusinessService implements ProductBusinessInterface
 
 	/**
 	 * This function removes a product from the database
-	 * @param The product to be removed
+	 * @param product to be removed
 	 */
 	@Override
 	public boolean remove(ProductModel product) 

@@ -22,7 +22,7 @@ public class ProductController {
 		
 		/**
 		 * This function injects a user business service at runtime for use in this particular class
-		 * @param userService A business service which handles any functions related to login
+		 * @param productService A business service which handles any functions related to login
 		 */
 	@Autowired
 	public void setProductBusinessService(ProductBusinessInterface productService)

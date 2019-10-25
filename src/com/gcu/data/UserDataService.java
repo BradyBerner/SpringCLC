@@ -5,12 +5,20 @@ import java.util.List;
 
 import com.gcu.model.CredentialsModel;
 import com.gcu.model.UserModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
+import javax.sql.DataSource;
 
 /**
  * Data access service that handles database persistence logic regarding users
  *
  */
 public class UserDataService implements DataAccessInterface<UserModel> {
+
+	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplateObject;
 
 	/**
 	 * Method that handles attempted user login
@@ -19,14 +27,20 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	 */
 	public UserModel findByCredential(CredentialsModel credentials) 
 	{
-		if(credentials.getUsername().equals("tester") && credentials.getPassword().equals("testing"))
-		{
-			return new UserModel(1, "User", "Found", credentials.getUsername(), credentials.getPassword(), "Hello@World.com", "111-111-1111", 0, 1);
+		String sql = "SELECT * FROM springCLC.USERS WHERE USERNAME = ? AND PASSWORD = ?";
+		UserModel user = new UserModel();
+
+		try{
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, credentials.getUsername(), credentials.getPassword());
+
+			while(srs.next()){
+				user = new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS"));
+			}
+		} catch (Exception e){
+			e.printStackTrace();
 		}
-		else
-		{
-			return new UserModel();
-		}
+
+		return user;
 	}
 	
 	/**
@@ -36,12 +50,19 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	@Override
 	public List<UserModel> findAll() 
 	{
-		List<UserModel> users= new ArrayList<UserModel>();
-		users.add(new UserModel(1, "UserFrom", "FindAll", "User1", "Password", "Hello@World.com", "111-111-1111", 1, 1));
-		users.add(new UserModel(2, "UserFrom", "FindAll", "User2", "Password", "Hello@World.com", "111-111-1111", 1, 1));
-		users.add(new UserModel(3, "UserFrom", "FindAll", "User3", "Password", "Hello@World.com", "111-111-1111", 1, 1));
-		users.add(new UserModel(4, "UserFrom", "FindAll", "User4", "Password", "Hello@World.com", "111-111-1111", 1, 1));
-		users.add(new UserModel(5, "UserFrom", "FindAll", "User5", "Password", "Hello@World.com", "111-111-1111", 1, 1));
+		String sql = "SELECT * FROM springCLC.USERS";
+		ArrayList<UserModel> users = new ArrayList<>();
+
+		try{
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
+
+			while(srs.next()){
+				users.add(new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS")));
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
 		return users;
 	}
 
@@ -69,7 +90,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 
 	/**
 	 * Method to add a user to the database
-	 * @param user A user to be registered
+	 * @param t A user to be registered
 	 * @return Returns a boolean stating success or failure of registration 
 	 */
 	@Override
@@ -80,7 +101,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 
 	/**
 	 * A function that allows user information to be edited
-	 * @param user The user to be edited
+	 * @param t The user to be edited
 	 */
 	@Override
 	public int update(UserModel t) {
@@ -98,4 +119,9 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		return 0;
 	}
 
+	@Autowired
+	public void setDataSource(DataSource dataSource){
+		this.dataSource = dataSource;
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
 }

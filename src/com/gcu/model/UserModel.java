@@ -21,7 +21,6 @@ public class UserModel {
     private String lastName;
     @Valid
     private CredentialsModel credentials;
-    //Had to kill email for time being, threw very nasty errors due to not recognizing email validation constraints
     @NotEmpty(message = "This is a required field")
     @Email(message = "Please enter a valid email address")
     private String email;
