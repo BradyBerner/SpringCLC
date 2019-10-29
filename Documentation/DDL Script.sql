@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema springCLC
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema springCLC
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `springCLC` DEFAULT CHARACTER SET utf8 ;
+USE `springCLC` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`USERS`
+-- Table `springCLC`.`USERS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`USERS` (
+CREATE TABLE IF NOT EXISTS `springCLC`.`USERS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `FIRSTNAME` VARCHAR(45) NOT NULL,
   `LASTNAME` VARCHAR(45) NOT NULL,
@@ -35,9 +35,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PRODUCTS`
+-- Table `SpringCLC`.`PRODUCTS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PRODUCTS` (
+CREATE TABLE IF NOT EXISTS `springCLC`.`PRODUCTS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `USERS_ID` INT NOT NULL,
   `NAME` VARCHAR(40) NOT NULL,
