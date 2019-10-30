@@ -22,7 +22,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	/**
 	 * A method that finds a user (either by an entire model or some relevant attributes) in the database and returns it.
 	 * In this case, we search for a user by their credentials in order to authenticate them upon login
-	 * @param t The user we are looking for
+	 * @param user The user we are looking for
 	 * @return The user, if found
 	 */
 	@Override
@@ -99,7 +99,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 
 	/**
 	 * Method to add a user to the database
-	 * @param t A user to be registered
+	 * @param user A user to be registered
 	 * @return int Returns the number of affected rows in the database
 	 */
 	@Override
@@ -139,7 +139,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 
 	/**
 	 * A function to remove a user from the database
-	 * @param user The user to be deleted
+	 * @param t The user to be deleted
 	 * @return int Returns the number of affected rows in the database 
 	 */
 	@Override

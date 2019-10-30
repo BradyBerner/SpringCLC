@@ -46,7 +46,8 @@ public class UserBusinessService implements UserBusinessInterface<UserModel>
 		else
 			throw new ItemNotFoundException();
 	}
-	
+
+	//TODO: Fix phone number
 	/**
 	 * Method to add a user to the database
 	 * @param user A user to be registered
