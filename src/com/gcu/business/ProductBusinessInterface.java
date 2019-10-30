@@ -36,7 +36,7 @@ public interface ProductBusinessInterface<T>
 	
 	/**
 	 * A function that allows products to be edited
-	 * @param boolean product product to be edited
+	 * @param product product product to be edited
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
