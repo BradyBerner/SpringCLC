@@ -3,6 +3,7 @@ package com.gcu.controller;
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.MessageModel;
 import com.gcu.model.UserModel;
+import com.gcu.utility.ItemAlreadyExistsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +24,14 @@ public class RegistrationController {
 
 	
 	//Class scoped business service to handle back-end logic
-	private UserBusinessInterface userService;
+	private UserBusinessInterface<UserModel> userService;
 		
 	/**
 	 * This function injects a user business service at runtime for use in this particular class
 	* @param userService A business service which handles any functions related to login
 	*/
 	@Autowired
-	public void setUserBusinessService(UserBusinessInterface userService)
+	public void setUserBusinessService(UserBusinessInterface<UserModel> userService)
 	{
 		this.userService=userService;
 	}
@@ -59,9 +60,19 @@ public class RegistrationController {
             return new ModelAndView("registrationPortal", "user", user);
         }
         
-        if(userService.register(user))
+        //Attempts to register a user in the database
+        try 
+        {
+        	//Attempts registration
+        	userService.register(user);
+        	
+        	//Returns to the main page upon success
         	return new ModelAndView("main", "message", new MessageModel("Registration Successful!", 1));
-        else
-        	return new ModelAndView("main", "message", new MessageModel("Registration Failed", 0));
+        }
+        //Handles the event that a user with this email already exists
+        catch(ItemAlreadyExistsException e)
+        {
+        	return new ModelAndView("registrationPortal", "message", new MessageModel("A user already exists with this email. Please log in or register with a different email", 0));
+        }
     }
 }

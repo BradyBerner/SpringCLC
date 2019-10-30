@@ -23,7 +23,8 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	 * @return A list of all products currently in the database
 	 */
 	@Override
-	public List<ProductModel> findAll() {
+	public List<ProductModel> findAll() 
+	{
 
 		String sql = "SELECT * FROM springCLC.PRODUCTS";
 		ArrayList<ProductModel> products = new ArrayList<>();
@@ -77,19 +78,26 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	 * @return Whether or not the product was successfully added
 	 */
 	@Override
-	public boolean create(ProductModel t) {
-
+	public int create(ProductModel t) 
+	{
+		// Rows to be returned regardless of query result
+		int rows= 0;
+		
+		//Sql query
 		String sql = "INSERT INTO springCLC.PRODUCTS(ID, USERS_ID, NAME, DESCRIPTION, GENRE) VALUES (?, ?, ?, ?, ?)";
 
-		try{
-			int rows = jdbcTemplateObject.update(sql, t.getID(), t.getUserID(), t.getName(), t.getDescription(), t.getGenre());
-
-			return rows == 1;
-		} catch (Exception e){
+		try
+		{
+			//Attempts to add a product to the database
+			rows = jdbcTemplateObject.update(sql, t.getID(), t.getUserID(), t.getName(), t.getDescription(), t.getGenre());
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 
-		return false;
+		//Returns number of rows to the database
+		return rows;
 	}
 
 	/**
@@ -128,8 +136,13 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 		return 0;
 	}
 
+	/**
+	 * This method sets the datasource to be used in this DAO, which is injected at runtime to allow for flexibility and security
+	 * @param dataSource The datasource specified by the app configuration
+	 */
 	@Autowired
-	public void setDataSource(DataSource dataSource){
+	public void setDataSource(DataSource dataSource)
+	{
 		this.dataSource = dataSource;
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}

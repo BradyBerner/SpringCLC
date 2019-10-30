@@ -2,6 +2,8 @@ package com.gcu.controller;
 
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.CredentialsModel;
+import com.gcu.model.UserModel;
+import com.gcu.utility.ItemNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,14 +22,14 @@ Controller for user login. Currently using hard-coded validation logic until a d
 public class LoginController {
 	
 	//Class scoped business service to handle back-end logic
-	private UserBusinessInterface userService;
+	private UserBusinessInterface<UserModel> userService;
 	
 	/**
 	 * This function injects a user business service at runtime for use in this particular class
 	 * @param userService A business service which handles any functions related to login
 	 */
 	@Autowired
-	public void setUserBusinessService(UserBusinessInterface userService)
+	public void setUserBusinessService(UserBusinessInterface<UserModel> userService)
 	{
 		this.userService=userService;
 	}
@@ -51,17 +53,37 @@ public class LoginController {
         if(result.hasErrors()){
             return new ModelAndView("loginPortal", "credentials", credentials);
         }
-
-        if(userService.authenticate(credentials)>0){
+        
+        //Attempts to authenticate and log on this user
+        try
+        {
+        	//Setting the credentials to a user model in order to satisfy the program's interfaces without typecasts
+        	UserModel user = new UserModel();
+        	user.setCredentials(credentials);
+        	
+        	//Attempts to authenticate user
+        	userService.authenticate(user);
+        	
+        	//Redirecting user to main page upon success (Currently returns login credentials. Later will place a user in the session)
             return new ModelAndView("main", "credentials", credentials);
         } 
-        //(temporarily?) returns to the login page with a message stating failure until a better solution is presented
-        else {
+        //Handles the event that a user is not found in the database
+        catch(ItemNotFoundException e)
+        {
         	 ModelAndView response = new ModelAndView();
         	 response.setViewName("loginPortal");
         	 response.addObject("credentials", credentials);
-        	 response.addObject("failed", "Incorrect Username or Password");
-           	return response;
+        	 response.addObject("failed", "Incorrect Username or Password");       	 
+           	 return response;
+        }
+        //Handling unknown errors
+        catch(Exception e)
+        {
+       	 	ModelAndView response = new ModelAndView();
+       		response.setViewName("loginPortal");
+       		response.addObject("credentials", credentials);
+       		response.addObject("failed", "An unknown error has occurred");       	 
+          	 return response;
         }
     }
 }

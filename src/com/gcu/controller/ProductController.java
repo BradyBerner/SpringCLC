@@ -3,6 +3,7 @@ package com.gcu.controller;
 import com.gcu.business.ProductBusinessInterface;
 import com.gcu.model.MessageModel;
 import com.gcu.model.ProductModel;
+import com.gcu.utility.ItemAlreadyExistsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +19,14 @@ import javax.validation.Valid;
 public class ProductController {
 
 	//Class scoped business service to handle back-end logic
-		private ProductBusinessInterface productService;
+		private ProductBusinessInterface<ProductModel> productService;
 		
 		/**
 		 * This function injects a user business service at runtime for use in this particular class
 		 * @param productService A business service which handles any functions related to login
 		 */
 	@Autowired
-	public void setProductBusinessService(ProductBusinessInterface productService)
+	public void setProductBusinessService(ProductBusinessInterface<ProductModel> productService)
 	{
 			this.productService=productService;
 	}
@@ -42,13 +43,19 @@ public class ProductController {
             return new ModelAndView("productCreationPortal", "product", product);
         }
 
-        if(productService.add(product)) 
+        try
         {
+        	productService.add(product);
             String m = String.format("New Product Successfully Created With the Following Details: Name: %s Description: %s Genre: %s", product.getName(), product.getDescription(), product.getGenre());
             return new ModelAndView("main", "message", new MessageModel(m, 1));
-        } else 
+        }
+        catch(ItemAlreadyExistsException e)
         {
-            return new ModelAndView("main", "message", new MessageModel("There was a problem creating your product", 0));
+        	return new ModelAndView("main", "message", new MessageModel("This product already exists in our records.", 0));
+        }
+        catch(Exception e)
+        {
+        	return new ModelAndView("main", "message", new MessageModel("There was a problem creating your product", 0));
         }
     }
 }

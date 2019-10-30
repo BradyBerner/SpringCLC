@@ -2,15 +2,17 @@ package com.gcu.business;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.gcu.data.DataAccessInterface;
-import com.gcu.data.UserDataService;
-import com.gcu.model.CredentialsModel;
 import com.gcu.model.UserModel;
+import com.gcu.utility.ItemAlreadyExistsException;
+import com.gcu.utility.ItemNotFoundException;
 
 /**
  * Implementation of a user business service that can handle business logic related to users
  */
-public class UserBusinessService implements UserBusinessInterface 
+public class UserBusinessService implements UserBusinessInterface<UserModel> 
 {
 	
 	//Class scoped data service injected at runtime
@@ -20,6 +22,7 @@ public class UserBusinessService implements UserBusinessInterface
 	 * This method injects a data Service at runtime to be used within the business service
 	 * @param userService The data service to be injected
 	 */
+	@Autowired
 	public void setUserDataService(DataAccessInterface<UserModel> userService)
 	{
 		this.userService=userService;
@@ -27,35 +30,54 @@ public class UserBusinessService implements UserBusinessInterface
 	
 	/**
 	 * Method that handles attempted user login
-	 * @param credentials The credentials a user is attempting to log in with
-	 * @return The user's ID upon a success. -1 upon a failure
+	 * @param credentials A user model containing the credentials a user is attempting to log in with
+	 * @return UserModel the user found within the database
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public int authenticate(CredentialsModel credentials) 
+	public UserModel authenticate(UserModel credentials) throws ItemNotFoundException
 	{
-		//Unable to use findByCredential method as it implements the generic DataAccessInterface
-		UserModel user = ((UserDataService)userService).findByCredential(credentials);
-		return user.getID();
+		//Attempting to find user in database
+		UserModel foundUser = userService.findBy(credentials);
+		//Returning user if one is found
+		if(foundUser.getID()>0)
+			return foundUser;
+		//Throwing exception if default user object is returned
+		else
+			throw new ItemNotFoundException();
 	}
 	
 	/**
 	 * Method to add a user to the database
 	 * @param user A user to be registered
 	 * @return Returns a boolean stating success or failure of registration 
+	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
 	 */
 	@Override
-	public boolean register(UserModel user) 
+	public boolean register(UserModel user) throws ItemAlreadyExistsException
 	{
-		return true;
+		int response = userService.create(user);
+		
+		//Checking for valid output
+		if(response>0)
+		{
+			return true;
+		}
+		//Checking for failed addition and returning response
+		else
+		{
+			return false;
+		}
 	}
 	
 	/**
 	 * Method to find a single user using that user's ID
 	 * @param id  The ID of the user being looked for
 	 * @return A found user, ID will be -1 if not found
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public UserModel findByID(int id) 
+	public UserModel findByID(int id) throws ItemNotFoundException
 	{
 		return userService.findByID(id);
 	}
@@ -63,9 +85,10 @@ public class UserBusinessService implements UserBusinessInterface
 	/**
 	 * A method that returns a list of every user in the database
 	 * @return A list of all users within the database
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
 	@Override
-	public List<UserModel> findAll() 
+	public List<UserModel> findAll() throws ItemNotFoundException
 	{
 		return userService.findAll();
 	}
@@ -73,19 +96,21 @@ public class UserBusinessService implements UserBusinessInterface
 	/**
 	 * A function that allows user information to be edited
 	 * @param user The user to be edited
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public boolean editUser(UserModel user) 
+	public boolean editUser(UserModel user) throws ItemNotFoundException
 	{
 		return true;
 	}
 
 	/**
 	 * A function to remove a user from the database
-	 * @ param user The user to be deleted 
+	 * @param user The user to be deleted 
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public boolean remove(UserModel user) 
+	public boolean remove(UserModel user) throws ItemNotFoundException
 	{
 		
 		return true;

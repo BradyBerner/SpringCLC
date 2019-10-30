@@ -3,7 +3,6 @@ package com.gcu.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gcu.model.CredentialsModel;
 import com.gcu.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,28 +18,40 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
-
+	
 	/**
-	 * Method that handles attempted user login
-	 * @param credentials The credentials a user is attempting to log in with
-	 * @return The user's ID upon a success. -1 upon a failure
+	 * A method that finds a user (either by an entire model or some relevant attributes) in the database and returns it.
+	 * In this case, we search for a user by their credentials in order to authenticate them upon login
+	 * @param t The user we are looking for
+	 * @return The user, if found
 	 */
-	public UserModel findByCredential(CredentialsModel credentials) 
+	@Override
+	public UserModel findBy(UserModel user) 
 	{
+		//Sql query
 		String sql = "SELECT * FROM springCLC.USERS WHERE USERNAME = ? AND PASSWORD = ?";
-		UserModel user = new UserModel();
+		//Creating a new user to be returned regardless of query result
+		UserModel foundUser = new UserModel();
 
-		try{
-			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, credentials.getUsername(), credentials.getPassword());
-
-			while(srs.next()){
-				user = new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS"));
+		//Attempts to find a user in the database using the supplied credentials
+		try
+		{
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, user.getCredentials().getUsername(), user.getCredentials().getPassword());
+			
+			//If a result is found, populates a user with valid information. Otherwise the default user is returned to the business service
+			if(srs.next())
+			{
+				foundUser = new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS"));
 			}
-		} catch (Exception e){
+		} 
+		//Catches mysterious sql errors
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
-
-		return user;
+		
+		//Returning the found user to the business service
+		return foundUser;
 	}
 	
 	/**
@@ -50,19 +61,28 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	@Override
 	public List<UserModel> findAll() 
 	{
+		//Sql query
 		String sql = "SELECT * FROM springCLC.USERS";
+		//An arraylist to be returned to the business service regardless of the query result
 		ArrayList<UserModel> users = new ArrayList<>();
 
-		try{
+		//Attempts to find users in the database
+		try
+		{
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
-
+			
+			//If results are found, populates an arraylist with valid information. Otherwise the default list is returned to the business service
 			while(srs.next()){
 				users.add(new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS")));
 			}
-		} catch (Exception e){
+		} 
+		//Catches mysterious sql errors
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
-
+		
+		//Returning the list of users to the business service
 		return users;
 	}
 
@@ -76,32 +96,40 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	/**
-	 * A method that finds a user in the database and returns it. Maybe useful, probably not. Who knows.
-	 * @param t The user we are looking for
-	 * @return The user, if found
-	 */
-	@Override
-	public UserModel findBy(UserModel t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * Method to add a user to the database
 	 * @param t A user to be registered
-	 * @return Returns a boolean stating success or failure of registration 
+	 * @return int Returns the number of affected rows in the database
 	 */
 	@Override
-	public boolean create(UserModel t) {
-		// TODO Auto-generated method stub
-		return false;
+	public int create(UserModel user) 
+	{
+		
+		// Rows to be returned regardless of query result
+		int rows= 0;
+		
+		//Sql query
+		String sql = "INSERT INTO springCLC.USERS(ID, FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, PHONENUMBER, ROLE, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try
+		{
+			//Attempts to add a product to the database
+			rows = jdbcTemplateObject.update(sql, user.getID(), user.getFirstName(), user.getLastName(), user.getCredentials().getUsername(), user.getCredentials().getPassword(), user.getEmail(), user.getPhoneNumber(), user.getRole(), user.getStatus());
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		//Returns number of rows to the database
+		return rows;
 	}
 
 	/**
 	 * A function that allows user information to be edited
 	 * @param t The user to be edited
+	 * @return int Returns the number of affected rows in the database
 	 */
 	@Override
 	public int update(UserModel t) {
@@ -111,7 +139,8 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 
 	/**
 	 * A function to remove a user from the database
-	 * @ param user The user to be deleted 
+	 * @param user The user to be deleted
+	 * @return int Returns the number of affected rows in the database 
 	 */
 	@Override
 	public int delete(UserModel t) {
@@ -119,9 +148,13 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		return 0;
 	}
 
+	/**
+	 * This method sets the datasource to be used in this DAO, which is injected at runtime to allow for flexibility and security
+	 * @param dataSource The datasource specified by the app configuration
+	 */
 	@Autowired
 	public void setDataSource(DataSource dataSource){
 		this.dataSource = dataSource;
-		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		jdbcTemplateObject = new JdbcTemplate(this.dataSource);
 	}
 }

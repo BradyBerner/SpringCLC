@@ -1,5 +1,6 @@
 package com.gcu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.UserModel;
+import com.gcu.utility.ItemNotFoundException;
 
 /**
  * REST controller that currently handles CRUD methods regarding users
@@ -19,14 +21,14 @@ public class UserRestService
 {
 	
 	//Class scoped business service to handle back-end logic
-	private UserBusinessInterface userService;
+	private UserBusinessInterface<UserModel> userService;
 			
 	/**
 	 * This function injects a user business service at runtime for use in this particular class
 	* @param userService A business service which handles any functions related to login
 	*/
 	@Autowired
-	public void setUserBusinessService(UserBusinessInterface userService)
+	public void setUserBusinessService(UserBusinessInterface<UserModel> userService)
 	{
 		this.userService=userService;
 	}
@@ -38,7 +40,14 @@ public class UserRestService
 	@GetMapping("/users")
 	public List<UserModel> getUsers()
 	{
-		return userService.findAll();
+		try 
+		{
+			return userService.findAll();
+		} 
+		catch (ItemNotFoundException e) 
+		{
+			return new ArrayList<UserModel>();
+		}
 	}
 	
 	
