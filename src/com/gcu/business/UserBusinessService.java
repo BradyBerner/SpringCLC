@@ -113,7 +113,6 @@ public class UserBusinessService implements UserBusinessInterface<UserModel>
 	@Override
 	public boolean remove(UserModel user) throws ItemNotFoundException
 	{
-		
 		return true;
 	}
 
