@@ -6,8 +6,8 @@
         <div class="block-heading">
             <h2 class="text-white" style="color: #ffffff;">Welcome to Our CLC</h2>
                 <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
-                <c:if test="${credentials.username != null}">
-                    <p class="text-white" style="color: #ffffff;">Welcome back, ${credentials.username}!</p>
+                <c:if test="${sessionScope.principal != null}">
+                    <p class="text-white" style="color: #ffffff;">Welcome back, ${sessionScope.principal.getUsername()}!</p>
                 </c:if>
                 <%--@elvariable id="message" type="com.gcu.model.MessageModel"--%>
                 <c:if test="${message != null}">

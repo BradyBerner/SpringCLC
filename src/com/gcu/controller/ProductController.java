@@ -2,6 +2,7 @@ package com.gcu.controller;
 
 import com.gcu.business.ProductBusinessInterface;
 import com.gcu.model.MessageModel;
+import com.gcu.model.Principal;
 import com.gcu.model.ProductModel;
 import com.gcu.utility.ItemAlreadyExistsException;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -37,11 +40,14 @@ public class ProductController {
     }
 
     @RequestMapping(path = "/doCreate", method = RequestMethod.POST)
-    public ModelAndView create(@Valid @ModelAttribute("product") ProductModel product, BindingResult result){
+    public ModelAndView create(@Valid @ModelAttribute("product") ProductModel product, BindingResult result, HttpSession session){
 
         if(result.hasErrors()){
             return new ModelAndView("productCreationPortal", "product", product);
         }
+
+        Principal principal = (Principal)session.getAttribute("principal");
+        product.setUserID(principal.getID());
 
         try
         {

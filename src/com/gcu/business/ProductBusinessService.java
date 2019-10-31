@@ -31,9 +31,9 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
 	 */
 	@Override
-	public boolean add(ProductModel product) throws ItemAlreadyExistsException
+	public int add(ProductModel product) throws ItemAlreadyExistsException
 	{
-		return true;
+		return productService.create(product);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 
 	/**
 	 * A function that allows products to be edited
-	 * @param boolean product product to be edited
+	 * @param product product product to be edited
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
@@ -84,7 +84,4 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
-
 }

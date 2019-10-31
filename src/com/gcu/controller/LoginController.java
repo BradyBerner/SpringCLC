@@ -2,6 +2,7 @@ package com.gcu.controller;
 
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.CredentialsModel;
+import com.gcu.model.Principal;
 import com.gcu.model.UserModel;
 import com.gcu.utility.ItemNotFoundException;
 
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /*
@@ -48,7 +52,7 @@ public class LoginController {
     eventually be changed to being checked against the database
      */
     @RequestMapping(path = "doLogin", method = RequestMethod.POST)
-    public ModelAndView authenticate(@Valid @ModelAttribute("credentials") CredentialsModel credentials, BindingResult result){
+    public ModelAndView authenticate(@Valid @ModelAttribute("credentials") CredentialsModel credentials, BindingResult result, HttpSession session){
 
         if(result.hasErrors()){
             return new ModelAndView("loginPortal", "credentials", credentials);
@@ -63,6 +67,8 @@ public class LoginController {
         	
         	//Attempts to authenticate user
         	userService.authenticate(user);
+
+        	session.setAttribute("principal", new Principal(user.getCredentials().getUsername(), user.getID(), user.getRole(), user.getStatus()));
         	
         	//Redirecting user to main page upon success (Currently returns login credentials. Later will place a user in the session)
             return new ModelAndView("main", "credentials", credentials);
@@ -86,4 +92,11 @@ public class LoginController {
           	 return response;
         }
     }
+
+    @RequestMapping(path = "signOut", method = RequestMethod.GET)
+    public String logout(HttpSession session){
+    	session.removeAttribute("principal");
+
+    	return "main";
+	}
 }

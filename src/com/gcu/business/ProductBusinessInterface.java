@@ -17,7 +17,7 @@ public interface ProductBusinessInterface<T>
 	 * @return boolean Whether or not the product was successfully added
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
 	 */
-	public boolean add(T product) throws ItemAlreadyExistsException;
+	public int add(T product) throws ItemAlreadyExistsException;
 	
 	/**
 	 * Method to find a single product using that product's ID
