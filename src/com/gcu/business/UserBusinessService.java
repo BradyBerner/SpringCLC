@@ -57,6 +57,14 @@ public class UserBusinessService implements UserBusinessInterface<UserModel>
 	@Override
 	public boolean register(UserModel user) throws ItemAlreadyExistsException
 	{
+		//If a user with the selected username already exists, returns an exception to the controller
+		//Checking for a valid user with the provided username
+		int foundID= userService.findByString(user.getCredentials().getUsername()).getID();
+		//Returning an exception if a valid user is found
+		if(foundID>0)
+			throw new ItemAlreadyExistsException();
+		
+		//Attempts to persist a user to the database
 		int response = userService.create(user);
 		
 		//Checking for valid output

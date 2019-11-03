@@ -9,6 +9,7 @@
 	<div class="container">
 		<div class="block-heading">
 			<h2 class="text-warning">Registration</h2>
+			<h2 class="warning_label">${message.message}</h2>
 		</div>
 		<%--@elvariable id="user" type="com.gcu.model.UserModel"--%>
 		<form:form method="POST" modelAttribute = "user" action="doRegistration" style="background-color: #888888;">

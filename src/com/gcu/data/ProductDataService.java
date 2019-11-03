@@ -67,9 +67,23 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	}
 
 	@Override
-	public ProductModel findBy(ProductModel t) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductModel findBy(ProductModel product) 
+	{
+		
+		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE NAME = ? AND GENRE = ?";
+		ProductModel foundProduct = new ProductModel();
+
+		try
+		{
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, product.getName(), product.getGenre());
+
+			while(srs.next())
+				foundProduct = new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE"));
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
+		return foundProduct;
 	}
 
 	/**
@@ -78,18 +92,18 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	 * @return Whether or not the product was successfully added
 	 */
 	@Override
-	public int create(ProductModel t) 
+	public int create(ProductModel product) 
 	{
 		// Rows to be returned regardless of query result
 		int rows= 0;
 		
 		//Sql query
-		String sql = "INSERT INTO springCLC.PRODUCTS(ID, USERS_ID, NAME, DESCRIPTION, GENRE) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO springCLC.PRODUCTS(USERS_ID, NAME, DESCRIPTION, GENRE) VALUES (?, ?, ?, ?)";
 
 		try
 		{
 			//Attempts to add a product to the database
-			rows = jdbcTemplateObject.update(sql, t.getID(), t.getUserID(), t.getName(), t.getDescription(), t.getGenre());
+			rows = jdbcTemplateObject.update(sql, product.getUserID(), product.getName(), product.getDescription(), product.getGenre());
 		} 
 		catch (Exception e)
 		{
@@ -144,6 +158,12 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	public void setDataSource(DataSource dataSource)
 	{
 		this.dataSource = dataSource;
-		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		jdbcTemplateObject = new JdbcTemplate(this.dataSource);
+	}
+
+	@Override
+	public ProductModel findByString(String search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

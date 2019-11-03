@@ -29,6 +29,13 @@ public interface DataAccessInterface <T>
 	public T findBy(T t);
 	
 	/**
+	 * Returns an object back to the business service if that object is found using a certain string
+	 * @param search A String search used to find a relevant object
+	 * @return T The object found with this search
+	 */
+	public T findByString(String search);
+	
+	/**
 	 * A method to create an object in the database
 	 * @param t The object to be persisted to the database
 	 * @return int The number of affected database rows

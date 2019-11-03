@@ -31,9 +31,17 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
 	 */
 	@Override
-	public int add(ProductModel product) throws ItemAlreadyExistsException
+	public boolean add(ProductModel product) throws ItemAlreadyExistsException
 	{
-		return productService.create(product);
+		//First Checks to see if the product already exists in the database. In the event that it does, returns an exception to the user
+		if(productService.findBy(product).getID()>0)
+			throw new ItemAlreadyExistsException();
+		
+		//Attempts to create a product in the database
+		if(productService.create(product)>0)
+			return true;
+		else
+			return false;
 	}
 
 	/**

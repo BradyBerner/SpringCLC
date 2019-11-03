@@ -74,5 +74,9 @@ public class RegistrationController {
         {
         	return new ModelAndView("registrationPortal", "message", new MessageModel("A user already exists with this email. Please log in or register with a different email", 0));
         }
+        catch(Exception e)
+        {
+        	return new ModelAndView("registrationPortal", "message", new MessageModel("An unknown error has occured", 0));
+        }
     }
 }

@@ -51,9 +51,13 @@ public class ProductController {
 
         try
         {
-        	productService.add(product);
-            String m = String.format("New Product Successfully Created With the Following Details: Name: %s Description: %s Genre: %s", product.getName(), product.getDescription(), product.getGenre());
-            return new ModelAndView("main", "message", new MessageModel(m, 1));
+        	if(productService.add(product))
+        	{
+        		String m = String.format("New Product Successfully Created");
+            	return new ModelAndView("main", "message", new MessageModel(m, 1));
+        	}
+        	else
+            	return new ModelAndView("main", "message", new MessageModel("There was a problem creating your product.", 0));
         }
         catch(ItemAlreadyExistsException e)
         {
@@ -61,7 +65,7 @@ public class ProductController {
         }
         catch(Exception e)
         {
-        	return new ModelAndView("main", "message", new MessageModel("There was a problem creating your product", 0));
+        	return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
         }
     }
 }

@@ -3,6 +3,7 @@ package com.gcu.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gcu.model.ProductModel;
 import com.gcu.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -156,5 +157,29 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	public void setDataSource(DataSource dataSource){
 		this.dataSource = dataSource;
 		jdbcTemplateObject = new JdbcTemplate(this.dataSource);
+	}
+
+	/**
+	 * Returns an object back to the business service if that object is found using a certain string
+	 * @param search A String search used to find a relevant object
+	 * @return T The object found with this search
+	 */
+	@Override
+	public UserModel findByString(String search) 
+	{
+		String sql = "SELECT * FROM springCLC.USERS WHERE USERNAME = ?";
+		UserModel foundUser = new UserModel();
+
+		try
+		{
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, search);
+
+			while(srs.next())
+				foundUser = new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS"));
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
+		return foundUser;
 	}
 }
