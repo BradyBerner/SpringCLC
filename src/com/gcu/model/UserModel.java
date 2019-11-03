@@ -1,6 +1,5 @@
 package com.gcu.model;
 
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.Valid;
@@ -9,6 +8,7 @@ import javax.validation.constraints.Size;
 
 /*
 User model that will be used by both the login and registration modules for the time being
+Makes use of a regular expression found on: https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression
  */
 public class UserModel {
 
@@ -22,7 +22,8 @@ public class UserModel {
     @Valid
     private CredentialsModel credentials;
     @NotEmpty(message = "This is a required field")
-    @Email(message = "Please enter a valid email address")
+    //Regular expression was obtained from source linked above
+    @Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)])", message = "Please enter a valid email address")
     private String email;
     @NotEmpty
     @Pattern(regexp="\\d{3}-\\d{3}-\\d{4}", message = "Please be sure that you've entered your phone number without the country code and with \"-\" between the area codes")
