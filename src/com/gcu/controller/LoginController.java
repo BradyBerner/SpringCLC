@@ -66,9 +66,9 @@ public class LoginController {
         	user.setCredentials(credentials);
         	
         	//Attempts to authenticate user
-        	UserModel foundUser = userService.authenticate(user);
+        	user = userService.authenticate(user);
 
-        	session.setAttribute("principal", new Principal(foundUser.getCredentials().getUsername(), foundUser.getID(), foundUser.getRole(), foundUser.getStatus()));
+        	session.setAttribute("principal", new Principal(user.getCredentials().getUsername(), user.getID(), user.getRole(), user.getStatus()));
         	
         	//Redirecting user to main page upon success (Currently returns login credentials. Later will place a user in the session)
             return new ModelAndView("main", "credentials", credentials);

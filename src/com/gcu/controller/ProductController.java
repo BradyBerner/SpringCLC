@@ -46,8 +46,7 @@ public class ProductController {
             return new ModelAndView("productCreationPortal", "product", product);
         }
 
-        Principal principal = (Principal)session.getAttribute("principal");
-        product.setUserID(principal.getID());
+        product.setUserID(((Principal)session.getAttribute("principal")).getID());
 
         try
         {
