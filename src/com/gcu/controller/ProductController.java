@@ -52,7 +52,7 @@ public class ProductController {
         {
         	if(productService.add(product))
         	{
-        		String m = String.format("New Product Successfully Created");
+        		String m = "New Product Successfully Created";
             	return new ModelAndView("main", "message", new MessageModel(m, 1));
         	}
         	else

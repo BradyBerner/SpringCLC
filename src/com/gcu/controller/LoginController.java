@@ -68,6 +68,7 @@ public class LoginController {
         	//Attempts to authenticate user
         	user = userService.authenticate(user);
 
+        	//Adds a new principal model to the session to keep track of the user's login
         	session.setAttribute("principal", new Principal(user.getCredentials().getUsername(), user.getID(), user.getRole(), user.getStatus()));
         	
         	//Redirecting user to main page upon success (Currently returns login credentials. Later will place a user in the session)
