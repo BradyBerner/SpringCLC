@@ -5,6 +5,7 @@ import com.gcu.model.MessageModel;
 import com.gcu.model.Principal;
 import com.gcu.model.ProductModel;
 import com.gcu.utility.ItemAlreadyExistsException;
+import com.gcu.utility.ItemNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,11 +43,26 @@ public class ProductController {
         return new ModelAndView("productCreationPortal", "product", new ProductModel());
     }
 
+    /**
+     * 
+     * @param session
+     * @return
+     */
     @RequestMapping(path = "/library", method = RequestMethod.GET)
-    public ModelAndView displayLibrary(HttpSession session){
-	    try{
+    public ModelAndView displayLibrary(HttpSession session)
+    {
+    	//Attempts to retrieve a user library
+	    try
+	    {
             return new ModelAndView("library", "library", productService.findAllWithID(((Principal)session.getAttribute("principal")).getID()));
-        } catch (Exception e){
+        } 
+	    //Returns message if nothing is found
+	    catch(ItemNotFoundException e)
+	    {
+	    	return new ModelAndView("library", "library", new MessageModel("You don't currently have any items in your library", 0));
+	    }
+	    //Catching unknown errors
+	    catch (Exception e){
             return new ModelAndView("main", "message", new MessageModel("There was an error retrieving your library", 0));
         }
     }

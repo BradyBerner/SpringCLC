@@ -56,9 +56,29 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 		return productService.findByID(id);
 	}
 
+	/**
+	 * Returns a list of products from the database with a certain ID, whether that is the product's primary key or a foreign key.
+	 * @param id The ID to search by
+	 * @return List<ProductModel> The list of all results with the searched ID.
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
+	 */
 	@Override
-	public List<ProductModel> findAllWithID(int id) {
-		return productService.findAllWithID(id);
+	public List<ProductModel> findAllWithID(int id) throws ItemNotFoundException
+	{
+		//Populating an arrayList from DAO
+		List<ProductModel> products = productService.findAllWithID(id);
+		
+		//Checking for valid output
+		if(products.size()>0)
+		{
+			return products;
+		}
+		//Checking for empty return value and returning error
+		else
+		{
+			throw new ItemNotFoundException();
+		}
+		
 	}
 
 	/**

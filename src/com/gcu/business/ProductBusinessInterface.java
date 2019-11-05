@@ -15,7 +15,7 @@ public interface ProductBusinessInterface<T>
 	 * Method to add a product to the database of products
 	 * @param product The product to be added
 	 * @return boolean Whether or not the product was successfully added
-	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
+	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied product already exists in the database, and duplicates are not allowed
 	 */
 	public boolean addProduct(T product) throws ItemAlreadyExistsException;
 	
@@ -27,7 +27,13 @@ public interface ProductBusinessInterface<T>
 	 */
 	public T findProductByID(int id) throws ItemNotFoundException;
 
-	public List<T> findAllWithID(int id);
+	/**
+	 * Returns a list of products from the database with a certain ID, whether that is the product's primary key or a foreign key.
+	 * @param id The ID to search by
+	 * @return List<ProductModel> The list of all results with the searched ID.
+	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
+	 */
+	public List<T> findAllWithID(int id) throws ItemNotFoundException;
 	
 	/**
 	 * A method that returns a list of every product in the database
