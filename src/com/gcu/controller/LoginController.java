@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -54,7 +53,9 @@ public class LoginController {
     @RequestMapping(path = "doLogin", method = RequestMethod.POST)
     public ModelAndView authenticate(@Valid @ModelAttribute("credentials") CredentialsModel credentials, BindingResult result, HttpSession session){
 
-        if(result.hasErrors()){
+    	//Returning to the login portal with any validation errors
+        if(result.hasErrors())
+        {
             return new ModelAndView("loginPortal", "credentials", credentials);
         }
         
@@ -77,6 +78,7 @@ public class LoginController {
         //Handles the event that a user is not found in the database
         catch(ItemNotFoundException e)
         {
+        	//Populating a response with relevant error information
         	 ModelAndView response = new ModelAndView();
         	 response.setViewName("loginPortal");
         	 response.addObject("credentials", credentials);
@@ -86,18 +88,29 @@ public class LoginController {
         //Handling unknown errors
         catch(Exception e)
         {
+        	//Populating a response with relevant error information
+        	e.printStackTrace();
        	 	ModelAndView response = new ModelAndView();
        		response.setViewName("loginPortal");
        		response.addObject("credentials", credentials);
-       		response.addObject("failed", "An unknown error has occurred");       	 
-          	 return response;
+       		response.addObject("failed", "An unknown error has occurred");  
+       		return response;
         }
+		
     }
 
+    /**
+     * This method handles the log out functionality of the application
+     * @param session The current session to be modified
+     * @return The main view to redirect to after logging out
+     */
     @RequestMapping(path = "signOut", method = RequestMethod.GET)
-    public String logout(HttpSession session){
+    public String logout(HttpSession session)
+    {
+    	//Removes the user from the session without invalidating the session (And by extension, causing redirection to fail)
     	session.removeAttribute("principal");
-
+    	
+    	//Return to response page
     	return "main";
 	}
 }

@@ -3,9 +3,11 @@ package com.gcu.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gcu.model.ProductModel;
 import com.gcu.model.UserModel;
+import com.gcu.utility.DatabaseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -13,7 +15,6 @@ import javax.sql.DataSource;
 
 /**
  * Data access service that handles database persistence logic regarding users
- *
  */
 public class UserDataService implements DataAccessInterface<UserModel> {
 
@@ -45,10 +46,11 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 				foundUser = new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS"));
 			}
 		} 
-		//Catches mysterious sql errors
-		catch (Exception e)
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 		
 		//Returning the found user to the business service
@@ -77,10 +79,11 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 				users.add(new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS")));
 			}
 		} 
-		//Catches mysterious sql errors
-		catch (Exception e)
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 		
 		//Returning the list of users to the business service
@@ -112,15 +115,18 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		
 		//Sql query
 		String sql = "INSERT INTO springCLC.USERS(ID, FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, PHONENUMBER, ROLE, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+		
+		//Attempts to add a product to the database
 		try
 		{
-			//Attempts to add a product to the database
+			//Binds data and sets result to the variable to be returned to the business service
 			rows = jdbcTemplateObject.update(sql, user.getID(), user.getFirstName(), user.getLastName(), user.getCredentials().getUsername(), user.getCredentials().getPassword(), user.getEmail(), user.getPhoneNumber(), user.getRole(), user.getStatus());
 		} 
-		catch (Exception e)
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 
 		//Returns number of rows to the database
@@ -154,7 +160,8 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	 * @param dataSource The datasource specified by the app configuration
 	 */
 	@Autowired
-	public void setDataSource(DataSource dataSource){
+	public void setDataSource(DataSource dataSource)
+	{
 		this.dataSource = dataSource;
 		jdbcTemplateObject = new JdbcTemplate(this.dataSource);
 	}
@@ -167,19 +174,30 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	@Override
 	public UserModel findByString(String search) 
 	{
+		//SQL statement
 		String sql = "SELECT * FROM springCLC.USERS WHERE USERNAME = ?";
+		
+		//User to be returned regardless of query result
 		UserModel foundUser = new UserModel();
 
+		//Attmepts to find the user in the database
 		try
 		{
+			//Binding data and getting a result
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, search);
 
+			//If a valid result is returned, populates the user model
 			while(srs.next())
 				foundUser = new UserModel(srs.getInt("ID"), srs.getString("FIRSTNAME"), srs.getString("LASTNAME"), srs.getString("USERNAME"), srs.getString("PASSWORD"), srs.getString("EMAIL"), srs.getString("PHONENUMBER"), srs.getInt("ROLE"), srs.getInt("STATUS"));
-		} catch (Exception e){
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
+		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
-
+		
+		//Returns the user model to the business
 		return foundUser;
 	}
 }

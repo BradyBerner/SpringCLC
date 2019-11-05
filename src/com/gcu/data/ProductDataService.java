@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gcu.model.ProductModel;
+import com.gcu.utility.DatabaseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -13,7 +16,8 @@ import javax.sql.DataSource;
 /**
  * Data service that handles database persistence logic regarding products
  */
-public class ProductDataService implements DataAccessInterface<ProductModel> {
+public class ProductDataService implements DataAccessInterface<ProductModel> 
+{
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
@@ -25,20 +29,31 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	@Override
 	public List<ProductModel> findAll() 
 	{
-
+		//SQL Statement
 		String sql = "SELECT * FROM springCLC.PRODUCTS";
+		
+		//Creates an arraylist so that a valid list is returned regardless of the result of the query
 		ArrayList<ProductModel> products = new ArrayList<>();
 
-		try{
+		//Attempts to query the database
+		try
+		{
+			//Binding data and getting result set
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
 
+			//Populating the found data if a valid result is returned
 			while(srs.next()){
 				products.add(new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE")));
 			}
-		} catch (Exception e){
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
+		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 
+		//Returning the populated list to the business
 		return products;
 	}
 
@@ -50,39 +65,65 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	@Override
 	public ProductModel findByID(int id) 
 	{
-
+		//SQL Statement
 		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE ID = ?";
-		ProductModel product = null;
-
-		try{
+		
+		//Creating a default product to be returned no matter what
+		ProductModel product = new ProductModel();
+		
+		//Attempts to query database for product
+		try
+		{
+			//Binding data and getting result set
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, id);
 
+			//Populating the found data if a valid result is returned
 			while(srs.next())
 				product = new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE"));
-		} catch (Exception e){
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
+		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
-
+		
+		//Returning a created product to the business service
 		return product;
 	}
 
+	/**
+	 * Returns a product back to the business service if that object is found in the database
+	 * @param product A product to be searched for in the database. (This implementation uses the Name and Genre of the product as relevant criteria)
+	 * @return Product Any product found using the criteria provided
+	 */
 	@Override
 	public ProductModel findBy(ProductModel product) 
 	{
-		
+		//SQL statement
 		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE NAME = ? AND GENRE = ?";
+		
+		//Creates a default product to be returned no matter what
 		ProductModel foundProduct = new ProductModel();
-
+		
+		//Attempting to find a product in the database
 		try
 		{
+			//Binding data and getting a result set
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, product.getName(), product.getGenre());
-
+			
+			//Populating the found product if a valid result is returned
 			while(srs.next())
 				foundProduct = new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE"));
-		} catch (Exception e){
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
+		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
-
+		
+		//Returning result regardless of whether or not is is populated with valid data
 		return foundProduct;
 	}
 
@@ -100,14 +141,17 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 		//Sql query
 		String sql = "INSERT INTO springCLC.PRODUCTS(USERS_ID, NAME, DESCRIPTION, GENRE) VALUES (?, ?, ?, ?)";
 
+		//Attempts to add a product to the database
 		try
 		{
-			//Attempts to add a product to the database
+			//Binding variables as prepared statement
 			rows = jdbcTemplateObject.update(sql, product.getUserID(), product.getName(), product.getDescription(), product.getGenre());
 		} 
-		catch (Exception e)
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 
 		//Returns number of rows to the database
@@ -119,17 +163,23 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	 * @param t product to be edited
 	 */
 	@Override
-	public int update(ProductModel t) {
-
+	public int update(ProductModel t) 
+	{
+		//SQL query
 		String sql = "UPDATE PRODUCTS SET NAME = ?, DESCRIPTION = ?, GENRE = ? WHERE ID = ?";
 
-		try{
+		//Attempts to update product in the database
+		try
+		{
+			//Bind data as prepared statement, update, and return result
 			return jdbcTemplateObject.update(sql, t.getName(), t.getDescription(), t.getGenre(), t.getID());
-		} catch (Exception e){
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e)
+		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
-
-		return 0;
 	}
 
 	/**
@@ -137,17 +187,23 @@ public class ProductDataService implements DataAccessInterface<ProductModel> {
 	 * @param t product to be removed
 	 */
 	@Override
-	public int delete(ProductModel t) {
-
+	public int delete(ProductModel t) 
+	{
+		//SQL query
 		String sql = "DELETE FROM PRODUCTS WHERE ID = ?";
-
-		try{
+		
+		//Attempts to delete product from the database
+		try
+		{
+			//Bind data as prepared statement, update, and return result
 			return jdbcTemplateObject.update(sql, t.getID());
-		} catch (Exception e) {
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e) 
+		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
-
-		return 0;
 	}
 
 	/**
