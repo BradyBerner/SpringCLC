@@ -57,6 +57,28 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 		return products;
 	}
 
+	@Override
+	public List<ProductModel> findAllWithID(int id) {
+		//SQL Statement
+		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE USERS_ID = ?";
+
+		ArrayList<ProductModel> products = new ArrayList<>();
+
+		//Queries the database
+		try{
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, id);
+
+			while(srs.next()){
+				products.add(new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE")));
+			}
+		} catch (DatabaseException e){
+			e.printStackTrace();
+			throw new DatabaseException();
+		}
+
+		return products;
+	}
+
 	/**
 	 * Method to find a single product using that product's ID
 	 * @param id The ID of the product being searched for
@@ -129,7 +151,7 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 
 	/**
 	 * Method to add a product to the database of products
-	 * @param t The product to be added
+	 * @param product The product to be added
 	 * @return Whether or not the product was successfully added
 	 */
 	@Override

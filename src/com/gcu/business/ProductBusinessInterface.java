@@ -26,6 +26,8 @@ public interface ProductBusinessInterface<T>
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	public T findProductByID(int id) throws ItemNotFoundException;
+
+	public List<T> findAllWithID(int id);
 	
 	/**
 	 * A method that returns a list of every product in the database

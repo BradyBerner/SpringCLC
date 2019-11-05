@@ -12,6 +12,13 @@ public interface DataAccessInterface <T>
 	 * @return List<T> A list of all of a certain object in the database
 	 */
 	public List<T> findAll();
+
+	/**
+	 * Returns a list of objects from the database with a certain ID, whether that is the object's primary key or a foreign key.
+	 * @param id The ID to search by
+	 * @return The list of all results with the searched ID.
+	 */
+	public List<T> findAllWithID(int id);
 	
 	/**
 	 * Returns an object with a specific ID

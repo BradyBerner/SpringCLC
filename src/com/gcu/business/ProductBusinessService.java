@@ -56,6 +56,11 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 		return productService.findByID(id);
 	}
 
+	@Override
+	public List<ProductModel> findAllWithID(int id) {
+		return productService.findAllWithID(id);
+	}
+
 	/**
 	 * A method that returns a list of every product in the database
 	 * @return List<ProductModel> A list of all products currently in the database

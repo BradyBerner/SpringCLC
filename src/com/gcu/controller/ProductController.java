@@ -25,7 +25,7 @@ import javax.validation.Valid;
 public class ProductController {
 
 	//Class scoped business service to handle back-end logic
-		private ProductBusinessInterface<ProductModel> productService;
+    private ProductBusinessInterface<ProductModel> productService;
 		
 		/**
 		 * This function injects a user business service at runtime for use in this particular class
@@ -40,6 +40,15 @@ public class ProductController {
     @RequestMapping(path = "/create", method = RequestMethod.GET)
     public ModelAndView displayCreate(){
         return new ModelAndView("productCreationPortal", "product", new ProductModel());
+    }
+
+    @RequestMapping(path = "/library", method = RequestMethod.GET)
+    public ModelAndView displayLibrary(HttpSession session){
+	    try{
+            return new ModelAndView("library", "library", productService.findAllWithID(((Principal)session.getAttribute("principal")).getID()));
+        } catch (Exception e){
+            return new ModelAndView("main", "message", new MessageModel("There was an error retrieving your library", 0));
+        }
     }
 
     @RequestMapping(path = "/doCreate", method = RequestMethod.POST)

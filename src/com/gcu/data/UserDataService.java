@@ -6,6 +6,7 @@ import java.util.List;
 import com.gcu.model.UserModel;
 import com.gcu.utility.DatabaseException;
 
+import com.gcu.utility.NotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -88,6 +89,11 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		
 		//Returning the list of users to the business service
 		return users;
+	}
+
+	@Override
+	public List<UserModel> findAllWithID(int id) {
+		throw new NotSupportedException();
 	}
 
 	/**
