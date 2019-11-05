@@ -17,7 +17,7 @@ public interface ProductBusinessInterface<T>
 	 * @return boolean Whether or not the product was successfully added
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
 	 */
-	public boolean add(T product) throws ItemAlreadyExistsException;
+	public boolean addProduct(T product) throws ItemAlreadyExistsException;
 	
 	/**
 	 * Method to find a single product using that product's ID
@@ -25,14 +25,14 @@ public interface ProductBusinessInterface<T>
 	 * @return ProductModel The product found. A -1 will be returned for ID in the event that nothing is found
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
-	public T findByID(int id) throws ItemNotFoundException;
+	public T findProductByID(int id) throws ItemNotFoundException;
 	
 	/**
 	 * A method that returns a list of every product in the database
 	 * @return List<ProductModel> A list of all products currently in the database
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
-	public List<T> findAll() throws ItemNotFoundException;
+	public List<T> findAllProducts() throws ItemNotFoundException;
 	
 	/**
 	 * A function that allows products to be edited
@@ -48,5 +48,5 @@ public interface ProductBusinessInterface<T>
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
-	public boolean remove(T product) throws ItemNotFoundException;
+	public boolean removeProduct(T product) throws ItemNotFoundException;
 }

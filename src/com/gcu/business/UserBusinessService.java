@@ -86,7 +86,7 @@ public class UserBusinessService implements UserBusinessInterface<UserModel>
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public UserModel findByID(int id) throws ItemNotFoundException
+	public UserModel findUserByID(int id) throws ItemNotFoundException
 	{
 		return userService.findByID(id);
 	}
@@ -97,7 +97,7 @@ public class UserBusinessService implements UserBusinessInterface<UserModel>
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
 	@Override
-	public List<UserModel> findAll() throws ItemNotFoundException
+	public List<UserModel> findAllUsers() throws ItemNotFoundException
 	{
 		return userService.findAll();
 	}
@@ -119,7 +119,7 @@ public class UserBusinessService implements UserBusinessInterface<UserModel>
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public boolean remove(UserModel user) throws ItemNotFoundException
+	public boolean removeUser(UserModel user) throws ItemNotFoundException
 	{
 		return true;
 	}

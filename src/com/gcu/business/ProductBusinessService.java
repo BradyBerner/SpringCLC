@@ -31,7 +31,7 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied object already exists in the database, and duplicates are not allowed
 	 */
 	@Override
-	public boolean add(ProductModel product) throws ItemAlreadyExistsException
+	public boolean addProduct(ProductModel product) throws ItemAlreadyExistsException
 	{
 		//First Checks to see if the product already exists in the database. In the event that it does, returns an exception to the user
 		if(productService.findBy(product).getID()>0)
@@ -51,7 +51,7 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
 	@Override
-	public ProductModel findByID(int id) throws ItemNotFoundException
+	public ProductModel findProductByID(int id) throws ItemNotFoundException
 	{
 		return productService.findByID(id);
 	}
@@ -62,7 +62,7 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public List<ProductModel> findAll() throws ItemNotFoundException
+	public List<ProductModel> findAllProducts() throws ItemNotFoundException
 	{
 		return productService.findAll();
 	}
@@ -87,7 +87,7 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
 	@Override
-	public boolean remove(ProductModel product) throws ItemNotFoundException
+	public boolean removeProduct(ProductModel product) throws ItemNotFoundException
 	{
 		// TODO Auto-generated method stub
 		return false;

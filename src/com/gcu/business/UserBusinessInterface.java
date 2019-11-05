@@ -29,14 +29,14 @@ public interface UserBusinessInterface<T>
 		 * @return A found user, ID will be -1 if not found
 		 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 		 */
-		public T findByID(int id) throws ItemNotFoundException;
+		public T findUserByID(int id) throws ItemNotFoundException;
 		
 		/**
 		 * A method that returns a list of every user in the database
 		 * @return A list of all users within the database
 		 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 		 */
-		public List<T> findAll() throws ItemNotFoundException;
+		public List<T> findAllUsers() throws ItemNotFoundException;
 		
 		/**
 		 * A function that allows user information to be edited
@@ -50,5 +50,5 @@ public interface UserBusinessInterface<T>
 		 * @param user The user to be deleted 
 		 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 		 */
-		public boolean remove(T user) throws ItemNotFoundException;
+		public boolean removeUser(T user) throws ItemNotFoundException;
 }

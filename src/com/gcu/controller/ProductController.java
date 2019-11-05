@@ -50,7 +50,7 @@ public class ProductController {
 
         try
         {
-        	if(productService.add(product))
+        	if(productService.addProduct(product))
         	{
         		String m = "New Product Successfully Created";
             	return new ModelAndView("main", "message", new MessageModel(m, 1));

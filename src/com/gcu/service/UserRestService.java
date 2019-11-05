@@ -42,7 +42,7 @@ public class UserRestService
 	{
 		try 
 		{
-			return userService.findAll();
+			return userService.findAllUsers();
 		} 
 		catch (ItemNotFoundException e) 
 		{

@@ -41,7 +41,7 @@ public class ProductRestService
 	{
 		try 
 		{
-			return productService.findAll();
+			return productService.findAllProducts();
 		} 
 		catch (ItemNotFoundException e) 
 		{
