@@ -17,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+/**
+ * 
+ */
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -41,23 +44,30 @@ public class ProductController {
 
     @RequestMapping(path = "/doCreate", method = RequestMethod.POST)
     public ModelAndView create(@Valid @ModelAttribute("product") ProductModel product, BindingResult result, HttpSession session){
-
+    	
+    	//returns to product creation form in the event of validation errors
         if(result.hasErrors()){
             return new ModelAndView("productCreationPortal", "product", product);
         }
-
+        
+        //Sets the user id of the product using the logged in user ID stored in the session
         product.setUserID(((Principal)session.getAttribute("principal")).getID());
-
+        
+        //Attempts to persist the product
         try
         {
+        	//Attempts to add persist a product
         	if(productService.addProduct(product))
         	{
+        		///Returns success message
         		String m = "New Product Successfully Created";
             	return new ModelAndView("main", "message", new MessageModel(m, 1));
         	}
+        	//Returns this message if by some miracle the back end bypasses all exceptions only to return a false value in product creation
         	else
             	return new ModelAndView("main", "message", new MessageModel("There was a problem creating your product.", 0));
         }
+        
         catch(ItemAlreadyExistsException e)
         {
         	return new ModelAndView("main", "message", new MessageModel("This product already exists in our records.", 0));

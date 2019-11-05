@@ -56,6 +56,7 @@ public class RegistrationController {
     @RequestMapping(path = "/doRegistration", method = RequestMethod.POST)
     public ModelAndView register(@Valid @ModelAttribute("user") UserModel user, BindingResult result){
 
+    	//Returns to registration page in the event of validation errors
         if(result.hasErrors()){
             return new ModelAndView("registrationPortal", "user", user);
         }
@@ -74,6 +75,7 @@ public class RegistrationController {
         {
         	return new ModelAndView("registrationPortal", "message", new MessageModel("A user already exists with this email. Please log in or register with a different email", 0));
         }
+        //Catches back-end exceptions
         catch(Exception e)
         {
         	return new ModelAndView("registrationPortal", "message", new MessageModel("An unknown error has occured", 0));
