@@ -34,7 +34,7 @@
 
 	<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:8889/springCLC" />
+		<property name="url" value="jdbc:mysql://localhost:3306/springCLC" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -60,19 +60,21 @@
 		<property name ="userDataService" ref="userDataService"/>
 		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
-	<bean id="productService" class="com.gcu.business.ProductBusinessService">
-		<property name ="productDataService" ref="productDataService"/>
+	<bean id="musicService" class="com.gcu.business.MusicBusinessService">
+		<property name ="trackDataService" ref="trackDataService"/>
+		<property name ="albumDataService" ref="albumDataService"/>
 		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	
    	<!-- Controller configuration -->
     <bean id ="loginController" class="com.gcu.controller.LoginController"/>
     <bean id ="registrationController" class="com.gcu.controller.RegistrationController"/>
- 	<bean id ="productController" class="com.gcu.controller.ProductController"/>
+ 	<bean id ="musicController" class="com.gcu.controller.MusicController"/>
  	<bean id ="userRestService" class="com.gcu.service.UserRestService"/>
- 	<bean id ="productRestService" class="com.gcu.service.ProductRestService"/>
+ 	<bean id ="musicRestService" class="com.gcu.service.MusicRestService"/>
  	
  	<!-- Data service configuration -->
  	<bean id= "userDataService" class="com.gcu.data.UserDataService"/>
- 	<bean id= "productDataService" class="com.gcu.data.ProductDataService"/>
+ 	<bean id= "albumDataService" class="com.gcu.data.AlbumDataService"/>
+ 	<bean id= "trackDataService" class="com.gcu.data.TrackDataService"/>
  </beans>

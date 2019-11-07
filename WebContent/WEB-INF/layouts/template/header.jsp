@@ -10,7 +10,7 @@
                     <c:choose>
                         <c:when test="${sessionScope.principal != null}">
                             <li class="nav-item">
-                                <a class="nav-link text-warning" href="/SpringCLC/product/create">Create Product</a>
+                                <a class="nav-link text-warning" href="/SpringCLC/music/createAlbum">Create Album</a>
                             </li>
                             <li class="nav-item" role="presentation"><a href="/SpringCLC/login/signOut" class="btn btn-primary text-warning bg-dark border-dark">Log Out</a></li>
                         </c:when>

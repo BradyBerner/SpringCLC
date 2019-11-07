@@ -3,8 +3,9 @@ package com.gcu.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gcu.model.ProductModel;
+import com.gcu.model.SongModel;
 import com.gcu.utility.DatabaseException;
+import com.gcu.utility.NotSupportedException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,67 +17,53 @@ import javax.sql.DataSource;
 /**
  * Data service that handles database persistence logic regarding products
  */
-public class ProductDataService implements DataAccessInterface<ProductModel> 
+public class TrackDataService implements DataAccessInterface<SongModel> 
 {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
 	/**
-	 * A method that returns a list of every product in the database
-	 * @return A list of all products currently in the database
+	 * Not supported at this time as finding all albums regardless of user would be meaningless
 	 */
 	@Override
-	public List<ProductModel> findAll() 
+	public List<SongModel> findAll() 
+	{
+		throw new NotSupportedException();
+	}
+	
+	/**
+	 * Returns a list of albums from the database with a certain album ID
+	 * @param id The ID to search by
+	 * @return The list of all results with the searched ID.
+	 */
+	@Override
+	public List<SongModel> findAllWithID(int id) 
 	{
 		//SQL Statement
-		String sql = "SELECT * FROM springCLC.PRODUCTS";
-		
-		//Creates an arraylist so that a valid list is returned regardless of the result of the query
-		ArrayList<ProductModel> products = new ArrayList<>();
+		String sql = "SELECT * FROM springCLC.SONGS WHERE ALBUMS_ID = ?";
 
-		//Attempts to query the database
-		try
-		{
-			//Binding data and getting result set
-			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
-
-			//Populating the found data if a valid result is returned
-			while(srs.next()){
-				products.add(new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE")));
-			}
-		} 
-		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
-		catch (DataAccessException e)
-		{
-			e.printStackTrace();
-			throw new DatabaseException();
-		}
-
-		//Returning the populated list to the business
-		return products;
-	}
-
-	@Override
-	public List<ProductModel> findAllWithID(int id) {
-		//SQL Statement
-		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE USERS_ID = ?";
-
-		ArrayList<ProductModel> products = new ArrayList<>();
+		//Creation of a blank list of tracks so that some data may be returned no matter what
+		ArrayList<SongModel> tracks = new ArrayList<>();
 
 		//Queries the database
-		try{
+		try
+		{
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, id);
 
 			while(srs.next()){
-				products.add(new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE")));
+				tracks.add(new SongModel(srs.getInt("ID"), srs.getInt("ALBUMS_ID"), srs.getString("NAME"), srs.getString("ARTIST")));
 			}
-		} catch (DatabaseException e){
+		} 
+		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
+		catch (DataAccessException e){
 			e.printStackTrace();
 			throw new DatabaseException();
 		}
-
-		return products;
+		
+		
+		//Returning list of tracks
+		return tracks;
 	}
 
 	/**
@@ -85,13 +72,13 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 	 * @return The product found. A -1 will be returned for ID in the event that nothing is found
 	 */
 	@Override
-	public ProductModel findByID(int id) 
+	public SongModel findByID(int id) 
 	{
 		//SQL Statement
-		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE ID = ?";
+		String sql = "SELECT * FROM springCLC.SONGS WHERE ID = ?";
 		
 		//Creating a default product to be returned no matter what
-		ProductModel product = new ProductModel();
+		SongModel product = new SongModel();
 		
 		//Attempts to query database for product
 		try
@@ -101,7 +88,7 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 
 			//Populating the found data if a valid result is returned
 			while(srs.next())
-				product = new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE"));
+				product = new SongModel(srs.getInt("ID"), srs.getInt("ALBUMS_ID"), srs.getString("NAME"), srs.getString("ARTIST"));
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e)
@@ -115,28 +102,28 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 	}
 
 	/**
-	 * Returns a product back to the business service if that object is found in the database
-	 * @param product A product to be searched for in the database. (This implementation uses the Name and Genre of the product as relevant criteria)
-	 * @return Product Any product found using the criteria provided
+	 * Returns a song back to the business service if that song is found in the database
+	 * @param product A song to be searched for in the database. (This implementation uses the Name and and the Album as relevant criteria)
+	 * @return Product Any song found using the criteria provided
 	 */
 	@Override
-	public ProductModel findBy(ProductModel product) 
+	public SongModel findBy(SongModel product) 
 	{
 		//SQL statement
-		String sql = "SELECT * FROM springCLC.PRODUCTS WHERE NAME = ? AND GENRE = ?";
+		String sql = "SELECT * FROM springCLC.SONGS WHERE NAME = ? AND ALBUMS_ID = ?";
 		
 		//Creates a default product to be returned no matter what
-		ProductModel foundProduct = new ProductModel();
+		SongModel foundProduct = new SongModel();
 		
 		//Attempting to find a product in the database
 		try
 		{
 			//Binding data and getting a result set
-			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, product.getName(), product.getGenre());
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, product.getName(), product.getAlbumID());
 			
 			//Populating the found product if a valid result is returned
 			while(srs.next())
-				foundProduct = new ProductModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("DESCRIPTION"), srs.getString("GENRE"));
+				foundProduct = new SongModel(srs.getInt("ID"), srs.getInt("ALBUMS_ID"), srs.getString("NAME"), srs.getString("ARTIST"));
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e)
@@ -150,24 +137,24 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 	}
 
 	/**
-	 * Method to add a product to the database of products
-	 * @param product The product to be added
-	 * @return Whether or not the product was successfully added
+	 * Method to add a song to the database
+	 * @param song The song to be added
+	 * @return Whether or not the song was successfully added
 	 */
 	@Override
-	public int create(ProductModel product) 
+	public int create(SongModel product) 
 	{
 		// Rows to be returned regardless of query result
 		int rows= 0;
 		
 		//Sql query
-		String sql = "INSERT INTO springCLC.PRODUCTS(USERS_ID, NAME, DESCRIPTION, GENRE) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO springCLC.SONGS(ALBUMS_ID, NAME, ARTIST) VALUES (?, ?, ?)";
 
 		//Attempts to add a product to the database
 		try
 		{
 			//Binding variables as prepared statement
-			rows = jdbcTemplateObject.update(sql, product.getUserID(), product.getName(), product.getDescription(), product.getGenre());
+			rows = jdbcTemplateObject.update(sql, product.getAlbumID(), product.getName(), product.getArtist());
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e)
@@ -182,19 +169,20 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 
 	/**
 	 * A function that allows products to be edited
-	 * @param t product to be edited
+	 * @param song  The updated song to be persisted
+	 * @return int The number of affected rows
 	 */
 	@Override
-	public int update(ProductModel t) 
+	public int update(SongModel song) 
 	{
 		//SQL query
-		String sql = "UPDATE PRODUCTS SET NAME = ?, DESCRIPTION = ?, GENRE = ? WHERE ID = ?";
+		String sql = "springCLC.UPDATE SONGS SET NAME = ?, ARTIST = ? WHERE ID = ?";
 
 		//Attempts to update product in the database
 		try
 		{
 			//Bind data as prepared statement, update, and return result
-			return jdbcTemplateObject.update(sql, t.getName(), t.getDescription(), t.getGenre(), t.getID());
+			return jdbcTemplateObject.update(sql, song.getName(), song.getArtist(), song.getID());
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e)
@@ -205,20 +193,20 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 	}
 
 	/**
-	 * This function removes a product from the database
-	 * @param t product to be removed
+	 * This function removes a song from the database
+	 * @param song product to be removed
 	 */
 	@Override
-	public int delete(ProductModel t) 
+	public int delete(SongModel song) 
 	{
 		//SQL query
-		String sql = "DELETE FROM PRODUCTS WHERE ID = ?";
+		String sql = "DELETE FROM springCLC.SONGS WHERE ID = ?";
 		
 		//Attempts to delete product from the database
 		try
 		{
 			//Bind data as prepared statement, update, and return result
-			return jdbcTemplateObject.update(sql, t.getID());
+			return jdbcTemplateObject.update(sql, song.getID());
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e) 
@@ -239,9 +227,11 @@ public class ProductDataService implements DataAccessInterface<ProductModel>
 		jdbcTemplateObject = new JdbcTemplate(this.dataSource);
 	}
 
+	/**
+	 * This function is not currently supported as there is no reason to search the database for a specific song by a string at this time
+	 */
 	@Override
-	public ProductModel findByString(String search) {
-		// TODO Auto-generated method stub
-		return null;
+	public SongModel findByString(String search) {
+		throw new NotSupportedException();
 	}
 }
