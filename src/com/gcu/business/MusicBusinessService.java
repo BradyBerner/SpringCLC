@@ -6,6 +6,7 @@ import com.gcu.model.AlbumModel;
 import com.gcu.model.SongModel;
 import com.gcu.utility.ItemAlreadyExistsException;
 import com.gcu.utility.ItemNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 
 
 /**
@@ -97,6 +98,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return List<AlbumModel> The list of all results with the searched ID.
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
+	@Cacheable(value = "library")
 	public List<AlbumModel> findAllAlbumsByUser(int userID) throws ItemNotFoundException
 	{
 		//Populating an arrayList from DAO for all this user's albums

@@ -6,7 +6,6 @@
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav text-warning ml-auto">
                     <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
-                    <!--TODO: Temporary way for checking if someone is logged in should be replaced by session var-->
                     <c:choose>
                         <c:when test="${sessionScope.principal != null}">
                             <li class="nav-item">

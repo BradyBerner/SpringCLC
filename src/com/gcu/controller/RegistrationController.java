@@ -48,8 +48,6 @@ public class RegistrationController {
     Method that will eventually handle validating and sending new user information to be stored in the database. For the
     time being simply checks that all of the user's input was valid and routes them to the login page or back to the
     registration form if their input is invalid.
-    
-    TODO: Routing back to the login will keep the same URI as it doesn't leave this controller. We can either use a redirect, 
     merge the login and registration controllers, or use a third option I can't think of in order to resolve this while
     still going directly to the login page. Meanwhile, it's set up to route to a landing page which has a link to login.
      */

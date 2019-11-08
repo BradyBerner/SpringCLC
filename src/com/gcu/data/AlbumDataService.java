@@ -6,6 +6,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -160,6 +161,7 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 	 * @return Whether or not the album was successfully added
 	 */
 	@Override
+	@CacheEvict(value = "library", allEntries = true)
 	public int create(AlbumModel album)
 	{
 		// Rows to be returned regardless of query result
