@@ -54,7 +54,7 @@
             <div class="modal-body" style="background-color: rgb(40, 40, 40)">
                 <div class="card" style="background-color: rgb(40, 40, 40)">
                     <%--@elvariable id="song" type="com.gcu.model.song"--%>
-                    <form:form method="post" id="addSongForm" modelAttribute="song" action="/SpringCLC/songs/addSong">
+                    <form:form method="post" id="addSongForm" modelAttribute="song" action="addSong">
                         <form:hidden path="albumID" value="${album.ID}"/>
                         <div class="form-group">
                             <form:label path="name">Name:</form:label>

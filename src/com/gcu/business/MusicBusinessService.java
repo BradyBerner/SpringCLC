@@ -8,6 +8,7 @@ import com.gcu.utility.ItemAlreadyExistsException;
 import com.gcu.utility.ItemNotFoundException;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 
 
 /**
@@ -67,6 +68,10 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied song already exists in the database, and duplicates are not allowed
 	 * @throws ItemNotFoundException This exception is thrown in the event that the user is attempting to add a track to an album that does not exist
 	 */
+	@Caching(evict = {
+			@CacheEvict(value = "albums", key = "#song.albumID"),
+			@CacheEvict(value = "tracks", key = "#song.albumID")
+	})
 	public boolean addSong(SongModel song) throws ItemAlreadyExistsException, ItemNotFoundException
 	{
 		//Checks to see if the track is associated with a valid album. If it is not, returns an exception to the user
@@ -89,6 +94,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return AlbumModel The album found. A -1 will be returned for ID in the event that nothing is found
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
+	@Cacheable(value = "albums")
 	public AlbumModel findAlbumByID(int id) throws ItemNotFoundException
 	{
 		AlbumModel album = albumService.findByID(id);
@@ -140,6 +146,10 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
+	@Caching(evict = {
+			@CacheEvict(value = "albums", key = "#album.ID"),
+			@CacheEvict(value = "library", allEntries = true)
+	})
 	public int editAlbumInfo(AlbumModel album) throws ItemNotFoundException
 	{
 		return albumService.update(album);
@@ -151,6 +161,10 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
+	@Caching(evict = {
+			@CacheEvict(value = "albums", key = "#song.albumID"),
+			@CacheEvict(value = "tracks", key = "#song.albumID")
+	})
 	public boolean editTrackInfo(SongModel song) throws ItemNotFoundException
 	{
 		return false;
@@ -174,6 +188,10 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
+	@Caching(evict = {
+			@CacheEvict(value = "albums", key = "#song.albumID"),
+			@CacheEvict(value = "tracks", key = "#song.albumID")
+	})
 	public boolean removeTrack(SongModel song) throws ItemNotFoundException
 	{
 		return false;

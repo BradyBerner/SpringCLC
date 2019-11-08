@@ -8,6 +8,7 @@
                     <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
                     <c:choose>
                         <c:when test="${sessionScope.principal != null}">
+                            <li class="nav-item"><a class="nav-link text-warning" href="/SpringCLC/library/">Library</a></li>
                             <li class="nav-item" role="presentation"><a href="/SpringCLC/login/signOut" class="btn btn-primary text-warning bg-dark border-dark">Log Out</a></li>
                         </c:when>
                         <c:otherwise>

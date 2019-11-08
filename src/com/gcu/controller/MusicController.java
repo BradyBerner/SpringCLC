@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/library")
-public class AlbumController {
+public class MusicController {
 
     //Class scoped business service to handle back-end logic
     private MusicBusinessInterface<AlbumModel, SongModel> musicService;
@@ -160,6 +160,36 @@ public class AlbumController {
             }
         } catch (ItemNotFoundException e) {
             return new ModelAndView("main", "message", new MessageModel("We couldn't seem to find the album that you're trying to delete.", 0));
+        } catch (Exception e){
+            return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
+        }
+    }
+
+    @RequestMapping(path = "/addSong", method = RequestMethod.POST)
+    public ModelAndView addSong(@Valid @ModelAttribute("song") SongModel song, BindingResult result){
+
+        if(result.hasErrors()){
+            ModelAndView mav = new ModelAndView("albumView", "song", song);
+            try{
+                mav.addObject("album", musicService.findAlbumByID(song.getAlbumID()));
+            } catch (ItemNotFoundException e) {
+                return new ModelAndView("main", "message", new MessageModel("Looks like we couldn't find your album", 0));
+            }
+
+            mav.addObject("error", "addSong");
+            return mav;
+        }
+
+        try{
+            if(musicService.addSong(song)) {
+                return new ModelAndView("albumView", "album", musicService.findAlbumByID(song.getAlbumID()));
+            } else {
+                return new ModelAndView("main", "message", new MessageModel("There was a problem creating your song.", 0));
+            }
+        } catch (ItemAlreadyExistsException e) {
+            return new ModelAndView("main", "message", new MessageModel("This song already exists in our records.", 0));
+        } catch (ItemNotFoundException e) {
+            return new ModelAndView("main", "message", new MessageModel("It looks like there may have been an issue with the album you're trying to add a song to", 0));
         } catch (Exception e){
             return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
         }

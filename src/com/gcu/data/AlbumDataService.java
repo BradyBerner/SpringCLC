@@ -111,11 +111,11 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 
 	/**
 	 * Returns an album back to the business service if that album is found in the database
-	 * @param product An album to be searched for in the database. (This implementation uses the Name and Artist of the product as relevant criteria)
+	 * @param album An album to be searched for in the database. (This implementation uses the Name and Artist of the album as relevant criteria)
 	 * @return Product Any album found using the criteria provided
 	 */
 	@Override
-	public AlbumModel findBy(AlbumModel product) 
+	public AlbumModel findBy(AlbumModel album)
 	{
 		//SQL statement
 		String sql = "SELECT * FROM springCLC.ALBUMS WHERE NAME = ? AND ARTIST = ?";
@@ -127,9 +127,9 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 		try
 		{
 			//Binding data and getting a result set
-			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, product.getName(), product.getArtist());
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, album.getName(), album.getArtist());
 			
-			//Populating the found product if a valid result is returned
+			//Populating the found album if a valid result is returned
 			while(srs.next())
 				foundProduct = new AlbumModel(srs.getInt("ID"), srs.getInt("USERS_ID"), srs.getString("NAME"), srs.getString("ARTIST"),srs.getString("DESCRIPTION"), srs.getString("GENRE"),null);
 		} 
