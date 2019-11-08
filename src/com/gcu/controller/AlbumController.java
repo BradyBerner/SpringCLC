@@ -64,10 +64,13 @@ public class AlbumController {
     @RequestMapping(value = "/viewAlbum", method = RequestMethod.GET)
     public ModelAndView displayAlbum(@RequestParam int ID){
         try{
-            return new ModelAndView("albumView", "album", musicService.findAlbumByID(ID));
+            ModelAndView mav = new ModelAndView("albumView", "album", musicService.findAlbumByID(ID));
+            mav.addObject("song", new SongModel());
+            return mav;
         } catch (ItemNotFoundException e){
             return new ModelAndView("main", "message", new MessageModel("Looks like we couldn't find your album", 0));
         } catch (Exception e){
+            e.printStackTrace();
             return new ModelAndView("main", "message", new MessageModel("An unknown error has occured", 0));
         }
     }
@@ -123,6 +126,41 @@ public class AlbumController {
         }
         catch(Exception e)
         {
+            return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
+        }
+    }
+
+    @RequestMapping(path = "/edit", method = RequestMethod.POST)
+    public ModelAndView editAlbum(@Valid @ModelAttribute("album") AlbumModel album, BindingResult result){
+        if(result.hasErrors()){
+            return new ModelAndView("albumView", "album", album);
+        }
+
+        try{
+            if(musicService.editAlbumInfo(album) > 0){
+                return displayAlbum(album.getID());
+            } else {
+                return new ModelAndView("main", "message", new MessageModel("There was a problem updating your Album.", 0));
+            }
+        } catch (ItemNotFoundException e) {
+            return new ModelAndView("main", "message", new MessageModel("We couldn't seem to find the album that you're trying to edit.", 0));
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
+        }
+    }
+
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    public ModelAndView deleteAlbum(@ModelAttribute("album") AlbumModel album, HttpSession session){
+        try{
+            if(musicService.removeAlbum(album) > 0){
+                return displayLibrary(session);
+            } else {
+                return new ModelAndView("main", "message", new MessageModel("There was a problem deleting your Album.", 0));
+            }
+        } catch (ItemNotFoundException e) {
+            return new ModelAndView("main", "message", new MessageModel("We couldn't seem to find the album that you're trying to delete.", 0));
+        } catch (Exception e){
             return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
         }
     }

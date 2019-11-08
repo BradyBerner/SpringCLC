@@ -6,6 +6,7 @@ import com.gcu.model.AlbumModel;
 import com.gcu.model.SongModel;
 import com.gcu.utility.ItemAlreadyExistsException;
 import com.gcu.utility.ItemNotFoundException;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 
@@ -45,6 +46,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return boolean Whether or not the album was successfully added
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied album already exists in the database, and duplicates are not allowed
 	 */
+	@CacheEvict(value = "library", allEntries = true)
 	public boolean addAlbum(AlbumModel album) throws ItemAlreadyExistsException
 	{
 		//First Checks to see if the product already exists in the database. In the event that it does, returns an exception to the user
@@ -89,7 +91,15 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 */
 	public AlbumModel findAlbumByID(int id) throws ItemNotFoundException
 	{
-		return null;
+		AlbumModel album = albumService.findByID(id);
+
+		if(album.getID() != 0) {
+			album.setTracks(trackService.findAllWithID(album.getID()));
+		} else {
+			throw new ItemNotFoundException();
+		}
+
+		return album;
 	}
 
 	/**
@@ -130,9 +140,9 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
-	public boolean editAlbumInfo(AlbumModel album) throws ItemNotFoundException
+	public int editAlbumInfo(AlbumModel album) throws ItemNotFoundException
 	{
-		return false;
+		return albumService.update(album);
 	}
 	
 	/**
@@ -152,9 +162,10 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
-	public boolean removeAlbum(AlbumModel album) throws ItemNotFoundException
+	@CacheEvict(value = "library", allEntries = true)
+	public int removeAlbum(AlbumModel album) throws ItemNotFoundException
 	{
-		return false;
+		return albumService.delete(album);
 	}
 	
 	/**

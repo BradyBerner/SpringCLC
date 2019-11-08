@@ -50,7 +50,7 @@ public interface MusicBusinessInterface<T, S>
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
-	public boolean editAlbumInfo(T album) throws ItemNotFoundException;
+	public int editAlbumInfo(T album) throws ItemNotFoundException;
 	
 	/**
 	 * A function that allows songs to be edited
@@ -66,7 +66,7 @@ public interface MusicBusinessInterface<T, S>
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */
-	public boolean removeAlbum(T album) throws ItemNotFoundException;
+	public int removeAlbum(T album) throws ItemNotFoundException;
 	
 	/**
 	 * This function removes a song from the database

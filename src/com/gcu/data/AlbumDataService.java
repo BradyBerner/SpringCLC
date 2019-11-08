@@ -2,15 +2,12 @@ package com.gcu.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-
 import com.gcu.model.AlbumModel;
 import com.gcu.utility.DatabaseException;
 import com.gcu.utility.NotSupportedException;

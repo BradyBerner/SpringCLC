@@ -22,12 +22,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
 </head>
 
-<body style="background-color: #444444">
+<body style="background-color: rgb(44, 47, 49)">
 	<!-- Header -->
 	<tiles:insertAttribute name="header" />
 
 	<!-- Body Page -->
-	<div align="center" style="text-align: center; padding-top: 15px;">
+	<div align="center" style="text-align: center; padding-top: 15px; min-height: 90%">
 		<tiles:insertAttribute name="body" />
 	</div>
 

@@ -8,6 +8,7 @@ import com.gcu.utility.DatabaseException;
 import com.gcu.utility.NotSupportedException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -142,7 +143,7 @@ public class TrackDataService implements DataAccessInterface<SongModel>
 	 * @return Whether or not the song was successfully added
 	 */
 	@Override
-	public int create(SongModel product) 
+	public int create(SongModel song)
 	{
 		// Rows to be returned regardless of query result
 		int rows= 0;
@@ -150,11 +151,11 @@ public class TrackDataService implements DataAccessInterface<SongModel>
 		//Sql query
 		String sql = "INSERT INTO springCLC.SONGS(ALBUMS_ID, NAME, ARTIST) VALUES (?, ?, ?)";
 
-		//Attempts to add a product to the database
+		//Attempts to add a song to the database
 		try
 		{
 			//Binding variables as prepared statement
-			rows = jdbcTemplateObject.update(sql, product.getAlbumID(), product.getName(), product.getArtist());
+			rows = jdbcTemplateObject.update(sql, song.getAlbumID(), song.getName(), song.getArtist());
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e)
@@ -176,7 +177,7 @@ public class TrackDataService implements DataAccessInterface<SongModel>
 	public int update(SongModel song) 
 	{
 		//SQL query
-		String sql = "springCLC.UPDATE SONGS SET NAME = ?, ARTIST = ? WHERE ID = ?";
+		String sql = "UPDATE SONGS SET NAME = ?, ARTIST = ? WHERE ID = ?";
 
 		//Attempts to update product in the database
 		try

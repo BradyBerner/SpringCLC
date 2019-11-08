@@ -17,7 +17,7 @@
                             <div class="col-sm-6 col-md-5 col-lg-4 item">
                                 <div id="result" class="box" style="width:350px; height:350px;">
                                     <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="${pageContext.request.contextPath}/resources/images/20190920_223758.jpg"></a></div>
-                                    <div class="product-name"><a href="#" class="text">${current.name}</a></div>
+                                    <div class="product-name"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}" class="text">${current.name}</a></div>
                                 </div>
                             </div>
                         </c:forEach>

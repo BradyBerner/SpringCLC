@@ -78,9 +78,10 @@
    	<!-- Controller configuration -->
     <bean id ="loginController" class="com.gcu.controller.LoginController"/>
     <bean id ="registrationController" class="com.gcu.controller.RegistrationController"/>
- 	<bean id ="musicController" class="com.gcu.controller.MusicController"/>
+ 	<bean id ="albumController" class="com.gcu.controller.AlbumController"/>
  	<bean id ="userRestService" class="com.gcu.service.UserRestService"/>
  	<bean id ="musicRestService" class="com.gcu.service.MusicRestService"/>
+	<bean id="songController" class="com.gcu.controller.SongController"/>
  	
  	<!-- Data service configuration -->
  	<bean id= "userDataService" class="com.gcu.data.UserDataService"/>

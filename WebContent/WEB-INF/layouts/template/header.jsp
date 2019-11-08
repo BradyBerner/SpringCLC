@@ -1,16 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div align="center" style="margin-bottom: 5%">
 	<nav class="navbar navbar-light navbar-expand-lg fixed-top text-warning bg-dark border-dark clean-navbar">
-        <div class="container"><a class="navbar-brand text-warning logo" href="/SpringCLC/">CLC Title</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand text-warning logo" href="/SpringCLC/">SpringCLC</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav text-warning ml-auto">
                     <%--@elvariable id="credentials" type="com.gcu.model.CredentialsModel"--%>
                     <c:choose>
                         <c:when test="${sessionScope.principal != null}">
-                            <li class="nav-item">
-                                <a class="nav-link text-warning" href="/SpringCLC/music/createAlbum">Create Album</a>
-                            </li>
                             <li class="nav-item" role="presentation"><a href="/SpringCLC/login/signOut" class="btn btn-primary text-warning bg-dark border-dark">Log Out</a></li>
                         </c:when>
                         <c:otherwise>
