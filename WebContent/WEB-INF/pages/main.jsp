@@ -28,7 +28,7 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="${pageContext.request.contextPath}/resources/images/20190920_223758.jpg">
                     <div class="card-body info">
-                        <h4 class="card-title">Manage Music</h4>
+                        <a href="/SpringCLC/library/"><h4 class="card-title">Manage Music</h4></a>
                         <p class="card-text">"Soon" This card will link to a library where users can manage their music</p>
                     </div>
                 </div>

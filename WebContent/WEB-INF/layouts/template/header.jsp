@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div align="center">
+<div align="center" style="margin-bottom: 5%">
 	<nav class="navbar navbar-light navbar-expand-lg fixed-top text-warning bg-dark border-dark clean-navbar">
         <div class="container"><a class="navbar-brand text-warning logo" href="/SpringCLC/">CLC Title</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div

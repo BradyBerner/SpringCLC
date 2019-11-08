@@ -59,7 +59,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	
 	/**
 	 * Method to add a song to the database of products
-	 * @param product The song to be added
+	 * @param song The song to be added
 	 * @return boolean Whether or not the song was successfully added
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied song already exists in the database, and duplicates are not allowed
 	 * @throws ItemNotFoundException This exception is thrown in the event that the user is attempting to add a track to an album that does not exist
@@ -93,7 +93,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 
 	/**
 	 * Returns a list of albums from the database with a certain user's ID
-	 * @param id The ID to search by
+	 * @param userID The ID to search by
 	 * @return List<AlbumModel> The list of all results with the searched ID.
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
@@ -135,7 +135,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	
 	/**
 	 * A function that allows songs to be edited
-	 * @param album A song to be edited
+	 * @param song A song to be edited
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */

@@ -13,7 +13,7 @@ public interface MusicBusinessInterface<T, S>
 {
 	/**
 	 * Method to add an album to the database
-	 * @param product The album to be added
+	 * @param album The album to be added
 	 * @return boolean Whether or not the album was successfully added
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied album already exists in the database, and duplicates are not allowed
 	 */
@@ -21,7 +21,7 @@ public interface MusicBusinessInterface<T, S>
 	
 	/**
 	 * Method to add a song to the database of products
-	 * @param product The song to be added
+	 * @param song The song to be added
 	 * @return boolean Whether or not the song was successfully added
 	 * @throws ItemAlreadyExistsException This exception is thrown in the event that the supplied song already exists in the database, and duplicates are not allowed
 	 * @throws ItemNotFoundException This exception is thrown in the event that a necessary item is not found
@@ -54,7 +54,7 @@ public interface MusicBusinessInterface<T, S>
 	
 	/**
 	 * A function that allows songs to be edited
-	 * @param album A song to be edited
+	 * @param song A song to be edited
 	 * @return boolean Success/Failure depending on the success of the operation
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
 	 */

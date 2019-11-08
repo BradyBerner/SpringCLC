@@ -156,11 +156,11 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 
 	/**
 	 * Method to add an album to the database
-	 * @param song The album to be added
+	 * @param album The album to be added
 	 * @return Whether or not the album was successfully added
 	 */
 	@Override
-	public int create(AlbumModel product) 
+	public int create(AlbumModel album)
 	{
 		// Rows to be returned regardless of query result
 		int rows= 0;
@@ -172,7 +172,7 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 		try
 		{
 			//Binding variables as prepared statement
-			rows = jdbcTemplateObject.update(sql, product.getUserID(), product.getName(), product.getArtist(), product.getDescription(), product.getGenre());
+			rows = jdbcTemplateObject.update(sql, album.getUserID(), album.getName(), album.getArtist(), album.getDescription(), album.getGenre());
 		} 
 		//Exception thrown by the JDBCTemplate object in case there is an issue with a query/update
 		catch (DataAccessException e)
@@ -212,7 +212,7 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 
 	/**
 	 * This function removes a product from the database
-	 * @param An Album to be removed
+	 * @param album Album to be removed
 	 */
 	@Override
 	public int delete(AlbumModel album) 
