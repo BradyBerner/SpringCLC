@@ -130,10 +130,21 @@ public class MusicController {
         }
     }
 
+    /**
+     * This method is for editing an album. It takes in the album model that the user passes to it through a form checks
+     * to see if it has any errors and if so returns the user back to the form. Otherwise it attempts to proceed to persist
+     * the edits in the database and handles any exceptions that are thrown
+     * @param album The edited instance of the album model the user wants to edit
+     * @param result The variable to store whether or not there are any validation errors
+     * @return Returns a ModelAndView that will take the user to an error page, or back to the page they came from
+     */
     @RequestMapping(path = "/edit", method = RequestMethod.POST)
     public ModelAndView editAlbum(@Valid @ModelAttribute("album") AlbumModel album, BindingResult result){
         if(result.hasErrors()){
-            return new ModelAndView("albumView", "album", album);
+            ModelAndView mav = new ModelAndView("albumView", "album", album);
+            mav.addObject("song", new SongModel());
+            mav.addObject("error", "editAlbum");
+            return mav;
         }
 
         try{
