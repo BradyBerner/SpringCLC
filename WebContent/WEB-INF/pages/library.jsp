@@ -16,8 +16,9 @@
                         <c:forEach var="current" items="${library}">
                             <div class="col-sm-6 col-md-5 col-lg-4 item">
                                 <div id="result" class="box" style="width:350px; height:350px;">
-                                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="${pageContext.request.contextPath}/resources/images/20190920_223758.jpg"></a></div>
-                                    <div class="product-name"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}" class="text">${current.name}</a></div>
+                                    <div class="image"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}"><img class="img-fluid d-block mx-auto" src="${pageContext.request.contextPath}/resources/images/alb.jpg"></a></div>
+                                    <div class="product-name"><p style="color: white">${current.name}</p></div>
+<%--                                    <div class="product-name"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}" class="text">${current.name}</a></div>--%>
                                 </div>
                             </div>
                         </c:forEach>
@@ -43,7 +44,7 @@
     </div>
 
     <div class="modal fade" id="addAlbum" tabindex="-1" role="dialog" aria-labelledby="addAlbum" aria-hidden="true" style="color: white;">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: rgb(40, 40, 40)">
                     <h5 class="modal-title" id="ModalLabel">Add an Album</h5>

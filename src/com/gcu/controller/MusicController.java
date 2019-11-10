@@ -205,4 +205,47 @@ public class MusicController {
             return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
         }
     }
+
+    @RequestMapping(path = "/editSong", method = RequestMethod.POST)
+    public ModelAndView editSong(@Valid @ModelAttribute("song") SongModel song, BindingResult result){
+
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("albumView", "song", song);
+            try{
+                mav.addObject("album", musicService.findAlbumByID(song.getAlbumID()));
+            } catch (ItemNotFoundException e){
+                return new ModelAndView("main", "message", new MessageModel("Looks like we couldn't find your album", 0));
+            }
+
+            mav.addObject("error", "editSong"+song.getID());
+            return mav;
+        }
+
+        try{
+            if(musicService.editTrackInfo(song) > 0){
+                return new ModelAndView("albumView", "album", musicService.findAlbumByID(song.getAlbumID()));
+            } else {
+                return new ModelAndView("main", "message", new MessageModel("There was a problem editing your song.", 0));
+            }
+        } catch (ItemNotFoundException e) {
+            return new ModelAndView("main", "message", new MessageModel("It looks like we can't find the song you're trying to edit", 0));
+        } catch (Exception e){
+            return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
+        }
+    }
+
+    @RequestMapping(path = "/deleteSong", method = RequestMethod.POST)
+    public ModelAndView deleteSong(@ModelAttribute("song") SongModel song){
+        try{
+            if(musicService.removeTrack(song) > 0){
+                return new ModelAndView("albumView", "album", musicService.findAlbumByID(song.getAlbumID()));
+            } else {
+                return new ModelAndView("main", "message", new MessageModel("There was a problem deleting your song.", 0));
+            }
+        } catch (ItemNotFoundException e) {
+            return new ModelAndView("main", "message", new MessageModel("It looks like we can't find the song you're trying to delete", 0));
+        } catch (Exception e){
+            return new ModelAndView("main", "message", new MessageModel("An unknown error has occurred", 0));
+        }
+    }
 }

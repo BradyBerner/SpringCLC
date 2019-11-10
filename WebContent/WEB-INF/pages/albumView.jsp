@@ -4,8 +4,8 @@
 <div class="container bg-dark" style="min-height: 600px; margin-top:50px;">
     <div class="row" style="min-height: 450px;">
         <div class="col-lg-4" style="width: 285px;">
-            <img style="width: 250px;height: 250px;margin-top: 50px;">
-            <h6 style="color: white;width: 225px; margin-left: -20px; margin-top: 10px;">
+            <img style="width: 300px;height: 300px;margin-top: 40px;" src="${pageContext.request.contextPath}/resources/images/alb.jpg">
+            <h6 style="color: white;width: 225px; margin-left: -50px; margin-top: 10px;">
                 ${album.tracks.size()}
                 <c:choose>
                     <c:when test="${album.tracks.size() > 1}">
@@ -33,7 +33,72 @@
                         <p style="color: white;">${track.name}</p>
                     </div>
                     <div class="col-lg-1" style="padding-top: 5px; padding-bottom: 5px;">
-                        <p style="color: white;">4:17</p>
+                        <nobr><a href="#editSong${track.ID}" data-toggle="modal" data-target="#editSong${track.ID}"><i class="fas fa-cog" style="color: white; margin-top:3px;"></i></a>
+                            <a href="#deleteSong${track.ID}" data-toggle="modal" data-target="#deleteSong${track.ID}"><i class="far fa-times-circle" style="color:white;"></i></a></nobr>
+<%--                        <p style="color: white;">4:17</p>--%>
+                    </div>
+                </div>
+
+                <!-- Edit Song Modal -->
+                <div class="modal fade" id="editSong${track.ID}" tabindex="-1" role="dialog" aria-labelledby="editSong" aria-hidden="true" style="color: white;">
+                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: rgb(40, 40, 40)">
+                                <h5 class="modal-title" id="ModalLabel">Edit a Song</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.6;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="background-color: rgb(40, 40, 40)">
+                                <div class="card" style="background-color: rgb(40, 40, 40)">
+                                        <%--@elvariable id="song" type="com.gcu.model.song"--%>
+                                    <form:form method="post" id="editSongForm${track.ID}" modelAttribute="song" action="editSong">
+                                        <form:hidden path="ID" value="${track.ID}"/>
+                                        <form:hidden path="albumID" value="${album.ID}"/>
+                                        <div class="form-group">
+                                            <form:label path="name">Name:</form:label>
+                                            <form:input path="name" class="form-control item"/><form:errors path="name"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <form:label path="artist">Artist:</form:label>
+                                            <form:input path="artist" class="form-control item"/><form:errors path="artist"/>
+                                        </div>
+                                    </form:form>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="background-color: rgb(40,40,40)">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button form="editSongForm${track.ID}" class="btn btn-primary" type="submit">Edit Song</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirm Song Deletion Modal -->
+                <div class="modal fade" id="deleteSong${track.ID}" tabindex="-1" role="dialog" aria-labelledby="deleteSong" aria-hidden="true" style="color: white;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: rgb(40, 40, 40)">
+                                <h5 class="modal-title" id="ModalLabel">Warning!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.6;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="background-color: rgb(40,40,40);">
+                                <p>
+                                    Are you sure that you want to delete this album? This is a permanent action.
+                                </p>
+                                <form:form method="post" id="deleteSongForm${track.ID}" modelAttribute="song" action="deleteSong">
+                                    <form:hidden path="ID" value="${track.ID}"/>
+                                    <form:hidden path="albumID" value="${album.ID}"/>
+                                </form:form>
+                            </div>
+                            <div class="modal-footer" style="background-color: rgb(40, 40,40)">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button form="deleteSongForm${track.ID}" type="submit" class="btn btn-primary">Remove</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </c:forEach>
@@ -43,7 +108,7 @@
 
 <!-- Add Song Modal -->
 <div class="modal fade" id="addSong" tabindex="-1" role="dialog" aria-labelledby="addSong" aria-hidden="true" style="color: white;">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: rgb(40, 40, 40)">
                 <h5 class="modal-title" id="ModalLabel">Add a Song</h5>
@@ -78,7 +143,7 @@
 
 <!-- Edit Album Modal -->
 <div class="modal fade" id="editAlbum" tabindex="-1" role="dialog" aria-labelledby="editAlbum" aria-hidden="true" style="color: white;">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: rgb(40, 40, 40)">
                 <h5 class="modal-title" id="ModalLabel">Edit an Album</h5>
@@ -121,9 +186,9 @@
     </div>
 </div>
 
-<!-- Confirm Deletion Modal -->
+<!-- Confirm Album Deletion Modal -->
 <div class="modal fade" id="deleteAlbum" tabindex="-1" role="dialog" aria-labelledby="deleteAlbum" aria-hidden="true" style="color: white;">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: rgb(40, 40, 40)">
                 <h5 class="modal-title" id="ModalLabel">Warning!</h5>
@@ -146,3 +211,13 @@
         </div>
     </div>
 </div>
+
+<script src="https://kit.fontawesome.com/b9eea00489.js" crossorigin="anonymous"></script>
+<c:if test="${error != null}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#${error}').modal('toggle')
+        })
+    </script>
+</c:if>

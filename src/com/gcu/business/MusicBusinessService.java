@@ -165,9 +165,9 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 			@CacheEvict(value = "albums", key = "#song.albumID"),
 			@CacheEvict(value = "tracks", key = "#song.albumID")
 	})
-	public boolean editTrackInfo(SongModel song) throws ItemNotFoundException
+	public int editTrackInfo(SongModel song) throws ItemNotFoundException
 	{
-		return false;
+		return trackService.update(song);
 	}
 	
 	/**
@@ -192,8 +192,8 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 			@CacheEvict(value = "albums", key = "#song.albumID"),
 			@CacheEvict(value = "tracks", key = "#song.albumID")
 	})
-	public boolean removeTrack(SongModel song) throws ItemNotFoundException
+	public int removeTrack(SongModel song) throws ItemNotFoundException
 	{
-		return false;
+		return trackService.delete(song);
 	}
 }
