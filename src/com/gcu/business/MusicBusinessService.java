@@ -152,6 +152,12 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	})
 	public int editAlbumInfo(AlbumModel album) throws ItemNotFoundException
 	{
+		//Checks to see if the item to be edited exists in the database. If it does not, then returns an exception to the user
+		//This method checks the database using an ID, then checks for a valid ID returned back from the database
+		if(albumService.findByID(album.getID()).getID()<1)
+			throw new ItemNotFoundException();
+		
+		//If the album exists, attempts to update it
 		return albumService.update(album);
 	}
 	
@@ -167,6 +173,11 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	})
 	public int editTrackInfo(SongModel song) throws ItemNotFoundException
 	{
+		//Checks to see if the item to be edited exists in the database. If it does not, then returns an exception to the user
+		//This method checks the database using an ID, then checks for a valid ID returned back from the database
+		if(trackService.findByID(song.getID()).getID()<1)
+			throw new ItemNotFoundException();
+		
 		return trackService.update(song);
 	}
 	
@@ -179,6 +190,11 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	@CacheEvict(value = "library", allEntries = true)
 	public int removeAlbum(AlbumModel album) throws ItemNotFoundException
 	{
+		//Checks to see if the item to be deleted exists in the database. If it does not, then returns an exception to the user
+		//This method checks the database using an ID, then checks for a valid ID returned back from the database
+		if(albumService.findByID(album.getID()).getID()<1)
+			throw new ItemNotFoundException();
+		
 		return albumService.delete(album);
 	}
 	
@@ -194,6 +210,11 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	})
 	public int removeTrack(SongModel song) throws ItemNotFoundException
 	{
+		//Checks to see if the item to be deleted exists in the database. If it does not, then returns an exception to the user
+		//This method checks the database using an ID, then checks for a valid ID returned back from the database
+		if(trackService.findByID(song.getID()).getID()<1)
+			throw new ItemNotFoundException();
+		
 		return trackService.delete(song);
 	}
 }
