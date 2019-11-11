@@ -1,3 +1,4 @@
+<%--suppress XmlDuplicatedId --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -33,9 +34,10 @@
                         <p style="color: white;">${track.name}</p>
                     </div>
                     <div class="col-lg-1" style="padding-top: 5px; padding-bottom: 5px;">
-                        <nobr><a href="#editSong${track.ID}" data-toggle="modal" data-target="#editSong${track.ID}"><i class="fas fa-cog" style="color: white; margin-top:3px;"></i></a>
-                            <a href="#deleteSong${track.ID}" data-toggle="modal" data-target="#deleteSong${track.ID}"><i class="far fa-times-circle" style="color:white;"></i></a></nobr>
-<%--                        <p style="color: white;">4:17</p>--%>
+                        <nobr>
+                            <a href="#editSong${track.ID}" data-toggle="modal" data-target="#editSong${track.ID}"><i class="fas fa-cog" style="color: white; margin-top:3px;"></i></a>
+                            <a href="#deleteSong${track.ID}" data-toggle="modal" data-target="#deleteSong${track.ID}"><i class="far fa-times-circle" style="color:white;"></i></a>
+                        </nobr>
                     </div>
                 </div>
 
@@ -44,7 +46,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color: rgb(40, 40, 40)">
-                                <h5 class="modal-title" id="ModalLabel">Edit a Song</h5>
+                                <h5 class="modal-title" id="ModalLabel">Edit Song</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.6;">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -87,7 +89,7 @@
                             </div>
                             <div class="modal-body" style="background-color: rgb(40,40,40);">
                                 <p>
-                                    Are you sure that you want to delete this album? This is a permanent action.
+                                    Are you sure that you want to delete this song? This is a permanent action.
                                 </p>
                                 <form:form method="post" id="deleteSongForm${track.ID}" modelAttribute="song" action="deleteSong">
                                     <form:hidden path="ID" value="${track.ID}"/>
