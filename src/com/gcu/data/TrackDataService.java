@@ -8,7 +8,6 @@ import com.gcu.utility.DatabaseException;
 import com.gcu.utility.NotSupportedException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
