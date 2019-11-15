@@ -14,7 +14,7 @@
                     <%--@elvariable id="library" type="ArrayList<com.gcu.model.AlbumModel>"--%>
                     <c:when test="${library != null}">
                         <c:forEach var="current" items="${library}">
-                            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                            <div class="col-sm-6 col-md-5 col-lg-4 item" style="margin-top: 20px; margin-bottom:20px;">
                                 <div id="result" class="box" style="width:350px; height:350px;">
                                     <div class="image"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}"><img class="img-fluid d-block mx-auto" src="${pageContext.request.contextPath}/resources/images/alb.jpg"></a></div>
                                     <div class="product-name"><p style="color: white">${current.name}</p></div>
@@ -25,17 +25,7 @@
                     </c:when>
                     <c:otherwise>
                         <c:if test="${message != null}">
-                            <c:choose>
-                                <c:when test = "${message.messageType == 0}">
-                                    <div class="alert alert-danger" role="alert">${message.message}</div>
-                                </c:when>
-                                <c:when test="${message.messageType == 1}">
-                                    <div class="alert alert-success" role="alert">${message.message}</div>
-                                </c:when>
-                                <c:when test="${message.messageType == 2}">
-                                    <div class="alert alert-warning" role="alert">${message.message}</div>
-                                </c:when>
-                            </c:choose>
+                            <tiles:insertTemplate template="error.jsp" flush="true"></tiles:insertTemplate>
                         </c:if>
                     </c:otherwise>
                 </c:choose>
@@ -89,7 +79,7 @@
 
 <%--@elvariable id="error" type="java.lang.String"--%>
 <c:if test="${error != null}">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>--%>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#addAlbum').modal('toggle')

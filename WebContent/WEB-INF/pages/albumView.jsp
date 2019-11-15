@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:if test="${message != null}">
+    <tiles:insertTemplate template="error.jsp" flush="true"></tiles:insertTemplate>
+</c:if>
+
 <div class="container bg-dark" style="min-height: 600px; margin-top:50px;">
     <div class="row" style="min-height: 450px;">
         <div class="col-lg-4" style="width: 285px;">
@@ -33,8 +37,9 @@
                     <div class="col-lg-10" style="padding-top: 5px; padding-bottom: 5px;">
                         <p style="color: white;">${track.name}</p>
                     </div>
-                    <div class="col-lg-1" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="col-lg-1" style="padding-top: 5px; padding-bottom: 5px; margin-left: -15px;">
                         <nobr>
+                            <a href="#"><i class="fas fa-plus" style="color: white" data-toggle="tooltip" data-placement="left" title="Add to Playlist"></i></a>
                             <a href="#editSong${track.ID}" data-toggle="modal" data-target="#editSong${track.ID}"><i class="fas fa-cog" style="color: white; margin-top:3px;"></i></a>
                             <a href="#deleteSong${track.ID}" data-toggle="modal" data-target="#deleteSong${track.ID}"><i class="far fa-times-circle" style="color:white;"></i></a>
                         </nobr>
@@ -99,6 +104,29 @@
                             <div class="modal-footer" style="background-color: rgb(40, 40,40)">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 <button form="deleteSongForm${track.ID}" type="submit" class="btn btn-primary">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Song to Playlist Modal -->
+                <div class="modal fade" id="addToPlaylist${track.ID}" tabindex="-1" role="dialog" aria-labelledby="addToPlaylist${track.ID}" aria-hidden="true" style="color: white;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: rgb(40, 40, 40)">
+                                <h5 class="modal-title" id="ModalLabel">Select a Playlist</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.6;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="background-color: rgb(40,40,40);">
+                                <p>
+                                    <!-- Put dropdown menu of available playlists here -->
+                                </p>
+                            </div>
+                            <div class="modal-footer" style="background-color: rgb(40, 40,40)">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button form="deleteSongForm${track.ID}" type="submit" class="btn btn-primary">Add</button>
                             </div>
                         </div>
                     </div>

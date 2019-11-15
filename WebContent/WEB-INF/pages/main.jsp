@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!-- Main landing page after a login, contains links to other parts of the site -->
 <%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <section class="clean-block about-us" style="background-color: rgb(35, 35, 35); height:90%; background-image: url(${pageContext.request.contextPath}/resources/images/music-notes-wallpaper-16213-16712-hd-wallpapers.jpg)">
     <div class="container">
         <div class="block-heading">
@@ -9,19 +13,8 @@
                 <c:if test="${sessionScope.principal != null}">
                     <p class="text-white" style="color: #ffffff;">Welcome back, ${sessionScope.principal.getUsername()}!</p>
                 </c:if>
-                <%--@elvariable id="message" type="com.gcu.model.MessageModel"--%>
                 <c:if test="${message != null}">
-                    <c:choose>
-                        <c:when test = "${message.messageType == 0}">
-                            <div class="alert alert-danger" role="alert">${message.message}</div>
-                        </c:when>
-                        <c:when test="${message.messageType == 1}">
-                            <div class="alert alert-success" role="alert">${message.message}</div>
-                        </c:when>
-                        <c:when test="${message.messageType == 2}">
-                            <div class="alert alert-warning" role="alert">${message.message}</div>
-                        </c:when>
-                    </c:choose>
+                    <tiles:insertTemplate template="error.jsp" flush="true"></tiles:insertTemplate>
                 </c:if>
         </div>
         <div class="row justify-content-center">
