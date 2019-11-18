@@ -36,11 +36,6 @@
 		<!-- Header -->
 		<tiles:insertAttribute name="header" />
 
-		<!-- Body Page -->
-		<div align="center" style="text-align: center; padding-top: 15px; min-height: 90%">
-			<tiles:insertAttribute name="body" />
-		</div>
-
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -48,6 +43,11 @@
 		<script src="${smoothJs}"></script>
 		<script src="${themeJs}"></script>
 		<script src="${mainJs}"></script>
+
+		<!-- Body Page -->
+		<div align="center" style="text-align: center; padding-top: 15px; min-height: 90%">
+			<tiles:insertAttribute name="body" />
+		</div>
 
 		<!-- Footer Page -->
 		<tiles:insertAttribute name="footer" />
