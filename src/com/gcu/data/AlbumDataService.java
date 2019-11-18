@@ -118,7 +118,7 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 	public AlbumModel findBy(AlbumModel album)
 	{
 		//SQL statement
-		String sql = "SELECT * FROM springCLC.ALBUMS WHERE NAME = ? AND ARTIST = ?";
+		String sql = "SELECT * FROM springCLC.ALBUMS WHERE NAME = ? AND ARTIST = ? AND USERS_ID = ?";
 		
 		//Creates a default album to be returned no matter what
 		AlbumModel foundProduct = new AlbumModel();
@@ -127,7 +127,7 @@ public class AlbumDataService implements DataAccessInterface<AlbumModel>
 		try
 		{
 			//Binding data and getting a result set
-			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, album.getName(), album.getArtist());
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, album.getName(), album.getArtist(), album.getUserID());
 			
 			//Populating the found album if a valid result is returned
 			while(srs.next())
