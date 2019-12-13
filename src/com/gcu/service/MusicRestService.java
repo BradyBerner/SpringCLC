@@ -35,7 +35,7 @@ public class MusicRestService
 
 	/**
 	 * REST method that returns a list of all user in the database
-	 * @return
+	 * @return Returns a list of albums that are in the user's library
 	 */
 	@GetMapping("/albums")
 	public List<AlbumModel> getAlbums()

@@ -35,7 +35,7 @@ public class UserRestService
 	
 	/**
 	 * REST method that returns a list of all users in the database
-	 * @return
+	 * @return Returns a list of all users
 	 */
 	@GetMapping("/users")
 	public List<UserModel> getUsers()

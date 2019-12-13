@@ -42,6 +42,7 @@ public interface UserBusinessInterface<T>
 		 * A function that allows user information to be edited
 		 * @param user The user to be edited
 		 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
+		 * @return Returns a boolean denoting whether or not the user's record was successfully updated
 		 */
 		public boolean editUser(T user) throws ItemNotFoundException;
 		
@@ -49,6 +50,7 @@ public interface UserBusinessInterface<T>
 		 * A function to remove a user from the database
 		 * @param user The user to be deleted 
 		 * @throws ItemNotFoundException This exception is thrown in the event that no item matching the parameters is found in the database
+		 * @return Returns a boolean denoting whether or not the user was successfully removed
 		 */
 		public boolean removeUser(T user) throws ItemNotFoundException;
 }
