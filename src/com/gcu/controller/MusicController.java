@@ -18,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+/**
+ * This class functions as a controller for all music and album functions
+ */
 @SuppressWarnings("SpringMVCViewInspection")
 @Controller
 @RequestMapping("/library")

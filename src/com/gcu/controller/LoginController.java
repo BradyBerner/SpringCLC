@@ -37,18 +37,22 @@ public class LoginController {
 		this.userService=userService;
 	}
 	
-    /*
-    Method for displaying login form page
-     */
+	/**
+	 * Method for displaying login form page
+	 * @return ModelAndView A response page that displays the login portal with the relevant objects
+	 */
     @RequestMapping(path = "/portal", method = RequestMethod.GET)
     public ModelAndView displayPage(){
         //Change these view names as you see fit I just tried to make it obvious what they led to
         return new ModelAndView("loginPortal", "credentials", new CredentialsModel());
     }
 
-    /*
-    Method to validate user input as well as checking their input information against hard-coded information which will
-    eventually be changed to being checked against the database
+    /**
+     * Method to validate user input as well as checking their input information
+     * @param credentials The user's attempted login credentials
+     * @param result The binding result containing validation	
+     * @param session The current HTTP session
+     * @return ModelAndView A page dependent on the success or failure of the attempted login
      */
     @RequestMapping(path = "doLogin", method = RequestMethod.POST)
     public ModelAndView authenticate(@Valid @ModelAttribute("credentials") CredentialsModel credentials, BindingResult result, HttpSession session){

@@ -18,7 +18,6 @@
                                 <div id="result" class="box" style="width:350px; height:350px;">
                                     <div class="image"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}"><img class="img-fluid d-block mx-auto" src="${pageContext.request.contextPath}/resources/images/alb.jpg"></a></div>
                                     <div class="product-name"><p style="color: white">${current.name}</p></div>
-<%--                                    <div class="product-name"><a href="/SpringCLC/library/viewAlbum?ID=${current.ID}" class="text">${current.name}</a></div>--%>
                                 </div>
                             </div>
                         </c:forEach>
