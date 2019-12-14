@@ -39,7 +39,7 @@ public interface MusicBusinessInterface<T, S>
 	/**
 	 * Returns a list of albums from the database with a certain ID, whether that is the product's primary key or a foreign key.
 	 * @param id The ID to search by
-	 * @return List<T> The list of all results with the searched ID.
+	 * @return The list of all results with the searched ID.
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
 	public List<T> findAllAlbumsByUser(int id) throws ItemNotFoundException;

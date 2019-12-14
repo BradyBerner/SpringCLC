@@ -111,7 +111,7 @@ public class MusicBusinessService implements MusicBusinessInterface<AlbumModel,S
 	/**
 	 * Returns a list of albums from the database with a certain user's ID
 	 * @param userID The ID to search by
-	 * @return List<AlbumModel> The list of all results with the searched ID.
+	 * @return The list of all results with the searched ID.
 	 * @throws ItemNotFoundException This exception is thrown in the event that no item is found in the database
 	 */
 	@Cacheable(value = "library")

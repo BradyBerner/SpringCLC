@@ -9,7 +9,7 @@ public interface DataAccessInterface <T>
 {
 	/**
 	 * Returns "all" of a certain object from the database. In the case of large tables, the service that implements this method will determine at what point to stop returning data
-	 * @return List<T> A list of all of a certain object in the database
+	 * @return A list of all of a certain object in the database
 	 */
 	public List<T> findAll();
 
